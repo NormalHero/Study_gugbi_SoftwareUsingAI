@@ -3,7 +3,7 @@ package day04;
 import java.util.Scanner;
 
 public class MethodTask {
-	static int[] result = new int[2];
+	//	static int[] result = new int[2];
 	// [0] 최대값 , [1] 최소값
 
 	public static void main(String[] args) {
@@ -25,12 +25,14 @@ public class MethodTask {
 		//	System.out.println(methodTask.task10(10));	
 		int num =	methodTask.task11("구일이팔");
 		System.out.println(num);
-		//		int[] data = {5, 4, 10, 2, 1}; 
+		int[] data = new int[2];
+		methodTask.task12(data);
+		System.out.println("가장 큰 수 :" + data[0]+ " 가장 작은 수 : "+data[1]);
 
 
 
-		methodTask.task12();
-		System.out.println("최대 값: "+result[0]+" 최소 값: "+result[1]);
+		//		methodTask.task12();
+		//		System.out.println("최대 값: "+result[0]+" 최소 값: "+result[1]);
 	}
 	// 아이언
 	// 1~10까지 println()으로 출력하는 메소드
@@ -152,7 +154,7 @@ public class MethodTask {
 		int result = 0;
 		int[] data = new int[5];
 		for (int i = 0; i < data.length; i++) {
-			System.out.println( i+1+"번째 정수를 입력하세요");
+			System.out.println( i+1+"번째 정수를 입력하세요: ");
 			data[i] = sc.nextInt();
 		}
 		for (int i = 0; i < data.length; i++) {
@@ -191,30 +193,12 @@ public class MethodTask {
 	// 마스터
 	// 5개의 정수를 입력받고 최대값과 최소값을 구해주는 void형 메소드(메소드 안에서 출력 금지, 리턴타입은 void)
 
-	//	void task12(int[] num) {
-	//
-	//		//			int[] arData = {num1,num2,num3,num4,num5};
-	//
-	//
-	//		int min = 0, max = 0;
-	//		min = num[0];
-	//
-	//		for (int i = 0; i < num.length; i++) {
-	//
-	//
-	//			if(num[i] > max) {
-	//				max = num[i];
-	//			}
-	//			if(num[i]< min) {
-	//				min = num[i];
-	//			}
-	//		}
-	//		System.out.println("최소값 : "+min+" 최대값 : "+max);
-	//	}
 
 
 	// 메소드 내에서 입력받기
-	void task12() {
+	void task12(int[] data) {
+		
+
 
 
 
@@ -222,7 +206,7 @@ public class MethodTask {
 		Scanner sc = new Scanner(System.in);
 		int[] num = new int[5];
 		for (int i = 0; i < num.length; i++) {
-			System.out.println(i+1+"번째 정수를 입력하세요");
+			System.out.println(i+1+"번째 정수를 입력하세요: ");
 			num[i] = sc.nextInt();
 		}
 
@@ -240,8 +224,10 @@ public class MethodTask {
 				min = num[i];
 			}
 		}
-		result[0] = max;
-		result[1] = min;
+		data[0] = max;
+		data[1] = min;
+		//		result[0] = max;
+		//		result[1] = min;
 
 	}
 
