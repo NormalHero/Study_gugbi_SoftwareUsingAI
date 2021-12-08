@@ -163,7 +163,7 @@ public class ATM {
 						//국민은행이라면 수수료를 포함한 금액으로 잔액 검사를 해준다.
 						//미리 빼서 음수면 잔액부족으로 검사!
 						money *= user.getBankNum() == 2 ? 1.5 : 1.0;
-						if(user.getMoney() < money) {
+						if(user.getMoney() <   money * ( user.getBankNum() == 2 ? 1.5 : 1.0)) {
 							System.out.println("잔액이 부족합니다.");
 							continue;
 						}
