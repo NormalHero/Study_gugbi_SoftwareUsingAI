@@ -1,0 +1,24 @@
+package sync;
+
+public class ATM implements Runnable{
+	int money = 10000;
+	
+	@Override
+	 public synchronized void run() {
+		
+		for (int i = 0; i < 5; i++) {
+			withDraw(1000);
+			try {Thread.sleep(500);} catch (InterruptedException e) {;}
+		}
+	}
+	
+	 public /*synchronized*/ void withDraw(int money) {
+//		synchronized (this) {
+			this.money -= money;
+//		}
+		System.out.println(Thread.currentThread().getName()+"이(가)"+money +"원 출금");
+		System.out.println("현재 잔액: "+this.money+ "원");
+		
+	}
+	
+}
