@@ -1,0 +1,48 @@
+package file;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class FileTest  {
+	
+		// throws : 예외 던지기 (일괄처리)
+		// 메소드 내에서 자주 발생하는 예외를 메소드를 사용하는 쪽에서 한 번에 예외처리를 하고자 사용한다.
+		public static void main(String[] args) throws IOException {
+			// 절대경로 : 어디서든지 찾아갈 수 있는 경로
+			// 상대경로 : 현재 위치를 기준으로 찾아가는 경로 
+			
+			
+		
+			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("./test.txt"),true));
+//			bw.write("\n박민수"); // /n -> jvm에서 운영체제에 맞게 알아서 처리해줌 
+//			bw.newLine(); // /r/n -> 윈도우에서의 줄바꿈
+//			bw.write("박민수");
+			// 버퍼에 있음 플러시를 하지않으면 버퍼에남아있음 
+//			bw.close(); // 버퍼를 실행하며 닫아주는 cloce()
+			
+			
+			BufferedReader br  = null;
+			String line = null;
+		try {
+			br = new BufferedReader(new FileReader("test.txt"));
+			
+			// 한줄 씩 가져온다. 
+			// 줄바꿈을 가져오지 않는다.
+			while(  (line = br.readLine())!= null ) {
+//				System.out.println(line);
+				System.out.print(line);
+			}
+		}catch (FileNotFoundException e) {
+			System.out.println("없는 파일입니다.");
+		}finally {
+			if(br != null) { // null이라면 br이 실행되지 않은것으로 null이 아닐때만 닫아준다. 
+				br.close();
+			}
+		}
+		}
+}
