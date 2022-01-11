@@ -4,31 +4,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	img{
+/* 	img{
 		transition: all ease 1s;
 	}
 	
 	img:hover {
 		transform: rotate(45deg);
-	}	
+	} */	
 </style>
 </head>
 <body>
-<!--
-[실습]
-배경넣고 테두리 넣어라
-사진과 글 사이의 간격을 줘라
-사진을 클릭하면 뉴스 원본으로 가게 해라
-기사 제목을 달아라
-왼쪽 아래에 사진을 하나 추가해라
-뉴스 기사를 한 개 더 넣어라
-
-
-사진의 각을 변경해라
--->
-	<div>
-		<div style="display: flex; padding: 20px; background: #d3d3d38c; width:1200px;">
-			<div style="width: 50%">
+	<div id="top">
+		<div style="padding: 20px; background: #d3d3d38c; width:1200px;">
+			<div style="width: 50%; margin: 0 auto;">
 				<h4 style="width:554px; text-align: center;">"폰 잃어버렸는데 카카오페이 보안 뚫려 전 재산 날려…손이 덜덜"</h4>
 				<div style="width: 500px; background: #d3d3d38c; padding: 25px; border: 2px dotted black;">
 					<a href="https://news.naver.com/main/read.naver?mode=LS2D&mid=shm&sid1=105&sid2=732&oid=421&aid=0005833633">
@@ -48,7 +36,7 @@
 					이기범 기자(Ktiger@news1.kr)
 				</div>
 			</div>
-			<div style="width: 50%">
+			<div style="width: 50%; margin: 0 auto;">
 				<h4 style="width:554px; text-align: center;">"메타버스, 아직 존재하지 않는다"</h4>
 				<div style="width: 500px; background: #d3d3d38c; padding: 25px; border: 2px dotted black;">
 					<img src="메타버스1.gif" style="float:right; width: 300px; margin: 10px;">
@@ -68,5 +56,19 @@
 			</div>
 		</div>
 	</div>
+	<div id="div" style="position: fixed; bottom: 25px; right: 385px;">
+		<!-- <a href="#top"><img src="맨위로.png" width="50"></a> -->
+		<a><img src="맨위로.png" width="50"></a>
+	</div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$("#div").click(function(){
+		$("html, body").animate({scrollTop:0}, 500)
+	})
+</script>
 </html>
+
+
+
+
