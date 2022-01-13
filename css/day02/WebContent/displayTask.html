@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>display</title>
+<style>
+
+	/* flex */
+	div#wrap_flex{
+		display: flex;
+		 justify-content: center;
+	}
+	
+	/* table  */
+	div#wrap_table{
+	display: table;
+	margin: 0 auto;
+	table-layout: fixed;
+	width: 50%;
+	}
+	div#wrap_table_row{
+	display: table-row;
+	
+	}
+	div#wrap_table_cell{
+	display: table-cell;
+	
+	 
+	}
+	div#wrap_table_row img{
+	width: 100%;
+	}
+	
+	
+	/* float */
+		div#center-wrap {
+		text-align: center;
+	}
+		div#float-wrap {
+		display: inline-block;
+	}
+	
+	div#float-wrap div {
+		float: left;
+	}
+	
+ </style>
+</head>
+<body>
+	<!--  flex -->
+	<h2>flex</h2>
+	<div id="wrap_flex">
+		<div><img src="img1.jpg"></div>
+		<div><img src="img2.jpg"></div>
+		<div><img src="img3.jpg"></div>
+	</div>
+	
+	
+	
+	
+	 <!-- table -->
+	 <h2>table</h2>
+	<div id="wrap_table">
+		<div id="wrap_table_row">
+			<div id="wrap_table_cell"><img src="img1.jpg"></div>
+			<div id="wrap_table_cell"><img src="img2.jpg"></div>
+			<div id="wrap_table_cell"><img src="img3.jpg"></div>
+		</div>
+	</div>
+	
+	<!-- float -->
+	<h2>float</h2>
+		<div id="center-wrap">
+		<div id="float-wrap">
+			<div><img src="img1.jpg"></div>
+			<div><img src="img2.jpg"></div>
+			<div><img src="img3.jpg"></div>
+		</div>
+	</div>
+	
+</body>
+</html>
