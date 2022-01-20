@@ -80,6 +80,13 @@ public class UserRecordVO {
 		
 		return this.getRecordNum();
 	}
+
+	@Override
+	public String toString() {
+		return "UserRecordVO [recordNum=" + recordNum + ", userId=" + userId + ", recordTime=" + recordTime
+				+ ", recordDate=" + recordDate + ", recordExercise=" + recordExercise + ", recordCount=" + recordCount
+				+ "]";
+	}
    
    
    

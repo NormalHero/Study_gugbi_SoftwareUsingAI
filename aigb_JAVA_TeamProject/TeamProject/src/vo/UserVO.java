@@ -1,6 +1,6 @@
 package vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class UserVO {
 	// equals 재정의 , hashcode 재정의 여부 결정
@@ -9,7 +9,7 @@ public class UserVO {
 	private String userPw;  
 	private String userName;    
 	private Date userAge;  
-	private String PhonNum;
+	private String userPhoneNum;
 	private char userGender;
 	private String userRegion;
 	private int userStatus; //0 : 일반, 1 : 탈퇴
@@ -28,11 +28,12 @@ public class UserVO {
 	public void setUserStatus(int userStatus) {
 		this.userStatus = userStatus;
 	}
-	public String getPhonNum() {
-		return PhonNum;
+
+	public String getUserPhoneNum() {
+		return userPhoneNum;
 	}
-	public void setPhonNum(String phonNum) {
-		PhonNum = phonNum;
+	public void setUserPhoneNum(String userPhoneNum) {
+		this.userPhoneNum = userPhoneNum;
 	}
 	public int getUserNum() {
 		return userNum;
@@ -89,6 +90,10 @@ public class UserVO {
 		return false;
 	}
 	
+	@Override
+	public String toString() {
+		return "["+userId+"]";
+	}
 	@Override
 	public int hashCode() {
 		
