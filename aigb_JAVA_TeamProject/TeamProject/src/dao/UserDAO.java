@@ -7,10 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Scanner;
 
 import org.json.simple.JSONObject;
 
@@ -20,6 +19,10 @@ import vo.UserVO;
 
 
 public class UserDAO {
+		
+	String api_key = "NCSTFZGSGACJE9SI"; // 자신의API 키 
+	String api_secret = "WW3ZOL6NAB2G0XATZRY0OFNXJDZBRAMF"; // API SECRET KEY
+	 String coolSMSPhonNum ="01037325638";
 	
 	   public static int userNumber= 2; //테스트를 위한 임의에 회원번호 
 	   public static String number;
@@ -188,7 +191,7 @@ public class UserDAO {
 
 	   
 	   
-
+	   
 	  
 	   
 	   
@@ -233,7 +236,7 @@ public class UserDAO {
 			 
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
-			System.out.println(calendar.getTime());
+			
 			int birthYear = calendar.get(Calendar.YEAR);
 			int birthMonth = calendar.get(Calendar.MONTH);
 			int birthDay = calendar.get(Calendar.DAY_OF_MONTH);
@@ -255,7 +258,64 @@ public class UserDAO {
 		 }
 		 	
 		 	// 전화번호로 인증번호를 sms전송
-			public void sendNumber(String phoneNumber) {
+			public boolean sendNumber(String phoneNumber, String id) {
+				
+				
+			      String query = "SELECT COUNT(USERNUM), USERSTATUS FROM USERTABLE WHERE USERID = ? AND USERPHONNUM = ? GROUP BY USERSTATUS";
+			      
+			      int status = 0;
+			      boolean flag = false;
+			      try {
+			         conn = DBConnecter.getConnection();
+			         pstm = conn.prepareStatement(query);
+			         pstm.setString(1, id);
+//			         pstm.setString(2, encrypt(pw));
+			         pstm.setString(2, phoneNumber);
+			         rs = pstm.executeQuery();
+			         
+			         
+
+			         
+			         
+			         if(!rs.next()) { //실패
+			            status = -1;
+
+			         }else { //로그인 성공(STATUS가 0(일반) 또는 1(탈퇴))
+			            status = rs.getInt(2);
+			            if (status == 0 && rs.getInt(1)==1) {
+							// 일반
+			            	flag = true;
+						}else if(status == 1) {
+							// 탈퇴 
+							flag = false;
+						}
+			            
+			            
+			         }
+			         
+			      } catch (SQLException e) {
+			         System.out.println("일치하는 정보가 없습니다.");
+			         
+			      } finally {
+			         try {
+			            if(rs != null) {
+			               rs.close();
+			            }
+			            if(pstm != null) {
+			               pstm.close();
+			            }
+			            if(conn != null) {
+			               conn.close();
+			            }
+			         } catch (SQLException e) {
+			            throw new RuntimeException(e.getMessage());
+			         }
+			      }
+			      
+				
+				if (flag) {
+					
+				
 				String data = "0123456789";
 				Random r = new Random();
 				number = "";
@@ -267,24 +327,28 @@ public class UserDAO {
 					
 				}
 				
-				String api_key = "NCSTFZGSGACJE9SI";
-			    String api_secret = "WW3ZOL6NAB2G0XATZRY0OFNXJDZBRAMF";
+
 			    Message coolsms = new Message(api_key, api_secret);
 
 			
 			    HashMap<String, String> params = new HashMap<String, String>();
 			    params.put("to", phoneNumber);
-			    params.put("from", "01037325638");
+			    params.put("from", coolSMSPhonNum);
 			    params.put("type", "SMS");
 			    params.put("text", "인증번호 [" + number + "] 본인확인을 위해 입력해주세요.");
 			    params.put("app_version", "test app 2.2"); // application name and version
 			    try {
 			      JSONObject obj = (JSONObject) coolsms.send(params);
-			      System.out.println(obj.toString());
+//			      System.out.println(obj.toString());
 			    } catch (CoolsmsException e) {
-			      System.out.println(e.getMessage());
-			      System.out.println(e.getCode());
+//			      System.out.println(e.getMessage());
+//			      System.out.println(e.getCode());
+			    	System.out.println("전송 실패..");
 			    }
+			    return flag;
+				}else {
+					 return flag;
+				}
 			}
 			
 			// sendNumber()메소드로 전송한 인증번호 체크를 하는 메소드 구현
@@ -358,26 +422,28 @@ public class UserDAO {
 		            tempPw += data.charAt(r.nextInt(data.length()));
 		         }
 		         
-		         String api_key = "NCS6JPJHXZSKSYWS";
-		          String api_secret = "K8ZJKEAMDEVCXOLWRSECDPJFA7YOSGAI";
-		          Message coolsms = new Message(api_key, api_secret);
 
+		          Message coolsms = new Message(api_key, api_secret);
+		          
+		        
+		          
 		          // 4 params(to, from, type, text) are mandatory. must be filled
 		          HashMap<String, String> params = new HashMap<String, String>();
 //		          params.put("to", phoneNumber);
-		          params.put("to", "01089087253");
-		          params.put("from", "01089087253");
+		          params.put("to", phoneNum);
+		          params.put("from", coolSMSPhonNum);
 		          params.put("type", "SMS");
 		          params.put("text", "임시비밀번호 [" + tempPw + "] 로그인 후 비밀번호를 변경해주세요.");
 		          params.put("app_version", "test app 2.2"); // application name and version
 
-		          try {
-		            JSONObject obj = (JSONObject) coolsms.send(params);
-		            System.out.println(obj.toString());
-		          } catch (CoolsmsException e) {
-		            System.out.println(e.getMessage());
-		            System.out.println(e.getCode());
-		          }
+				    try {
+					      JSONObject obj = (JSONObject) coolsms.send(params);
+//					      System.out.println(obj.toString());
+					    } catch (CoolsmsException e) {
+//					      System.out.println(e.getMessage());
+//					      System.out.println(e.getCode());
+					    	System.out.println("전송 실패..");
+					    }
 		      }
 		      
 		      // 임시 비밀번호 업데이트
@@ -387,7 +453,8 @@ public class UserDAO {
 		         try {
 		            conn = DBConnecter.getConnection();
 		            pstm = conn.prepareStatement(query);
-		            pstm.setString(1, encrypt(tempPw));
+		            pstm.setString(1, tempPw);
+//		            pstm.setString(1, encrypt(tempPw));
 		            pstm.setString(2, id);
 		            pstm.executeUpdate();
 		         } catch (SQLException e) {

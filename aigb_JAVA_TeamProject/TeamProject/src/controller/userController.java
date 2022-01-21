@@ -28,6 +28,14 @@ public class userController {
 	}
 	
 	
+	public boolean ckName(String name) {
+		boolean flag= Pattern.matches("^[가-힣]*$", name);
+		if (flag) {
+			return true;
+		}
+		return false;
+	}
+	
 	// 비밀번호 정규식 메소드
 	public String passwordFromCk(String pw) {
 		// 10자리 미만 한글은 사용할 수 없다 
@@ -43,6 +51,7 @@ public class userController {
 		4. 공백문자 사용 불가
 
 */
+		 boolean a = Pattern.matches("^[ㄱ-ㅎ가-힣]*$", "비교문자");
 
 		
 		String pwPattern = "^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-z]).{9,12}$";
@@ -122,7 +131,7 @@ public class userController {
 	
 // 메소드로 거주지 번호를 에 따른 지역  String 리턴 
 	public String getRegion(int regionChoice ) {
-		String[] regionData = {"서울","경기", "인청", "강원", "충북", "울산","부산", "대구", "광주", "대전"
+		String[] regionData = {"서울","경기", "인천", "강원", "충북", "울산","부산", "대구", "광주", "대전"
 				, "세종", "충남", "경북", "경남", "전북", "전남", "제주"};
 		
 		return regionData[--regionChoice];

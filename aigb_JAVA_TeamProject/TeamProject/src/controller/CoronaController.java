@@ -40,42 +40,7 @@ public class CoronaController {
 	
 	}
 	
-	public String searchArea(String region) {
-		
-		String result = "";
-		
-		
-		
-		int ranking = 0;
-		int index= 0;
-		List<WebElement> areas = driver.findElements(By.cssSelector("a div.c-PJLV"));
-		try {Thread.sleep(2000);} catch (InterruptedException e) {;}
-		
-		// 지역별 확진자수로 데이터가 크롤링이 불안정함
-		List<WebElement> counts =driver.findElements(By.cssSelector("tr td:nth-child(2) div.c-davuDQ")); 
-//		List<WebElement> counts =driver.findElements(By.cssSelector("tr.c-fFHQVw div.c-REZfI div.c-davuDQ")); 
-		
-//		List<WebElement> counts =driver.findElements(By.cssSelector("c-dKTxzV c-davuDQ"));
-		try {Thread.sleep(2000);} catch (InterruptedException e) {;}
-		
-		
-		for(int i=0; i<areas.size();i++) {
-			System.out.println(i+1+counts.get(i).getText());
-			if(areas.get(i).getText().equals(region)) {
-				
-//				System.out.println(counts.get(i).getText());
-				result = counts.get(i).getText();
-				result = result.replaceAll(",", "");
-				result = result.replaceAll("명", "");
-				return result;
-			}
-		}
-	
 
-		
-		return null;
-		
-	}	
 	
 	public String totalCorona() {
 		String result="";
@@ -92,26 +57,42 @@ public class CoronaController {
 		return result;
 	}
 
-// 총 화	
 	
 	
+	public String findRegion(String region) {
+		String data = "";
+		List<WebElement> regions =driver.findElements(By.cssSelector("div.gnb + div a ")); 
+		try {Thread.sleep(1000);} catch (InterruptedException e) {;}
+		for (int i = 0; i < regions.size(); i++) {
+			
+			if (region.equals(regions.get(i).getAttribute("innerHTML"))) {
+				data = getRegionCorona(regions.get(i).getAttribute("href"));
+				break;
+			}
+			
+		}
+		
+		data = data.replaceAll(",", "");
+		data = data.replaceAll("명", "");
+		
+		return data;
+		
+	}
+	
+	public String getRegionCorona(String cityHref) {
+		cityHref = cityHref.substring(23,cityHref.length());
+//		System.out.println(cityHref);
+		 String data = driver.findElement(By.cssSelector("a[href=\""+cityHref+"\"] div.c-davuDQ " )).getAttribute("innerHTML");
+		return data;
+	}
 	
 	public static void main(String[] args) {
 		CoronaController c = new CoronaController();
 //		c.operate();
 		
 		
-		
-		String data = c.searchArea("경기");
-		if (data != null) {
-			System.out.println(data);
+		System.out.println(c.findRegion("경기"));
 
-		}else {
-			// 데이터 로딩시 알수없는 문제로 지역별 코로나 확진자수를 가져오지 못하는 경우가 존재한다.
-			// 이때 null리턴하여 전체 확진자를 기준으로 작업한다. 
-			
-			System.out.println(c.totalCorona()); // 코로나 총 확진자명
-		}
 		
 		
 		c.operate();

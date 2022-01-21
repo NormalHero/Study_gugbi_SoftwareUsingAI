@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import controller.userController;
 
@@ -29,8 +30,46 @@ public class TestView {
 		Scanner sc = new Scanner(System.in);
 		userController userC = new userController();
 		
+//		Date resultDate = Date.valueOf("2002-12-21"); 
+//		user.setUserAge(resultDate);
+//		
+//		
+//		System.out.println(user.getUserAge());
+//		
+//		
+
+		// 한글 정규식 
+//		while(true) {
+//			String name ="ddㅇ";
+//
+//		if (userC.ckName(name)) {
+//			System.out.println("확인");
+//			break;	
+//			}else {
+//				System.out.println("한글만 입력 해주세요 ㅠㅠ");break;
+//			}
+//		}
 		
-		int test = 0;
+//		if (a) {
+//			System.out.println("확인");
+//		}else {
+//			System.out.println("xxxx");
+//		}
+//		
+//		java.util.Date utilDate = user.getUserAge(); //현재 날짜(자바 객체)
+//		System.out.println(dao.getAge(utilDate));
+//
+//				System.out.println("1.▶");
+//				System.out.println("1.");
+//
+//				System.out.println("| 날짜 :2022.01.21 10:37 | user2님");
+//				System.out.println(" ▶  스쿼트  ");
+//				System.out.println(" ▶  90초  ");
+//				System.out.println(" ▶  30번  ");
+//		
+		
+		
+/*		int test = 0;
 		int test2 = 0;
 		while(true) {
 			System.out.println("입력: ");
@@ -64,7 +103,7 @@ public class TestView {
 		}
 
 		break;
-		}	
+		}	*/
 		
 		
 		

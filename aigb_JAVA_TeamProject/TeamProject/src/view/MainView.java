@@ -44,7 +44,7 @@ public class MainView {
 
 				try {Thread.sleep(1000);} catch (InterruptedException e) {;}
 				System.out.println(chatBotName+"가 처음 이신가요?");
-				System.out.println("1.네  2.아니요 3. 나가기" );
+				System.out.println("1.네  2.아니요  3.비밀번호 찾기  4.나가기 " );
 				choice = sc.nextInt();
 			}else {
 				choice = 2;
@@ -132,8 +132,16 @@ public class MainView {
 				if (!joinFlag) {
 					continue;
 				}
+				
+				while(true) {
 				System.out.println("이름을 알려주세요!"); // 중복검사 필요
-				name = sc.next(); // 한글만 들어가게 메소드 구현@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				name = sc.next(); // 한글만 들어가게 메소드 구현@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				if (userC.ckName(name)) {
+					break;	
+					}else {
+						System.out.println("한글만 입력 해주세요 ㅠㅠ");
+					}
+				}
 
 				while(true) {
 					System.out.println("성별을 알려주세요!");
@@ -148,7 +156,7 @@ public class MainView {
 					}
 
 				}
-
+				// 전화번호 유효성 검사
 				while(true) {
 					System.out.println("전화번호를 알려주세요!");
 					PhoneNum = sc.next(); 
@@ -159,7 +167,7 @@ public class MainView {
 						continue;
 					}
 				}
-				// 전화번호 유효성 검사
+
 				int ageYear  = 0;
 				int ageMonth = 0;
 				int ageMount = 0;
@@ -294,26 +302,144 @@ public class MainView {
 						System.out.println();
 						System.out.println(chatBotName+"가 무엇을 도와드릴까요?");
 						// 선택지 제공
-						System.out.println(uDAO.userNumber);
 
 
-						// 선택지 제공
-						System.out.println("1. 마이페이지\n2. 오늘의 운동 추천\n3.운동 기록하기 \n4. 나가기");
-						choice = sc.nextInt();
-						ArrayList<UserRecordVO> records =new ArrayList<>();
-						UserVO user = new UserVO();
 						while(true){
+							// 선택지 제공
+							System.out.println("1. 마이페이지\n2. 오늘의 운동 추천\n3. 운동 기록하기 \n4. 나가기");
+							choice = sc.nextInt();
+							ArrayList<UserRecordVO> records =new ArrayList<>();
+							UserVO user = new UserVO();
 							if(choice == 1){
-								//  1.  1-1 마이페이지 getMyInfo, 1-2 getALLRecord,
-								//회원정보 수정 or 조회
+								int myinfochoice = 0;
+								String repw = "";
+								user=uDAO.getMyInfo();
 
-								// 조회 
+
+								System.out.println("비밀번호 재확인");
+								repw = sc.next();
+
+								// vo비밀번호랑 입력받은 비밀번호랑 같은지 확인
+								if(user.getUserPw().equals(repw)) {
+									System.out.println("일치");
+								}else {
+									System.out.println("비밀번호를 정확히 입력해 주세요!" );
+									repw = sc.next();
+								}
+
+								//자기정보 
 								user = uDAO.getMyInfo();
+								java.util.Date utilDate = user.getUserAge(); //현재 날짜(자바 객체)
+
+								System.out.println();
 								System.out.println(user.getUserName()+"님의 마이페이지입니다!");
-								System.out.println("전화번호 :"+user.getUserPhoneNum());
-								
-								// 날짜 나이로 변경시 문법 오류 발생 
-//								System.out.println(user.getUserAge()); 
+
+								System.out.println();
+								while(true) {
+									System.out.println("수정 하려는 나의 정보를 선택하세요.");
+									System.out.println("1.아이디 ▶ " + user.getUserId());
+									System.out.println("2.이름▶ " + user.getUserName());
+									System.out.println("3.전화번호 ▶ " + user.getUserPhoneNum());
+									System.out.println("4.지역 ▶ " + user.getUserRegion());
+									System.out.println("5.(만)나이 ▶ " + "만" + uDAO.getAge(utilDate)  + "살");
+									System.out.println("6.비밀번호 변경하기");
+									System.out.println("7.수정하지 않기");
+									System.out.println();
+									System.out.println("원하는 버튼을 선택해 주세요");
+									//회원정보 수정
+
+
+
+									myinfochoice = sc.nextInt();
+									if(myinfochoice == 1) {
+										System.out.println("죄송합니다.\n아이디 수정은 불가 합니다^^;");
+										continue;
+									}else if(myinfochoice == 2) {
+										while(true) {
+											System.out.println("이름을 알려주세요!"); // 중복검사 필요
+											String updateName = sc.next(); // 한글만 들어가게 메소드 구현@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+											if (userC.ckName(updateName)) {
+												break;	
+												}else {
+													System.out.println("한글만 입력 해주세요 ㅠㅠ");
+												}
+											}
+									}
+									
+									else if(myinfochoice == 3){
+										System.out.println("전화번호수정하기");   
+										String userPhoneNum = "";
+										// 전화번호 유효성 검사
+										while(true) {
+											System.out.println("변경할 전화번호를 알려주세요!");
+											userPhoneNum = sc.next(); 
+											if(userC.phonNumCk(userPhoneNum)) {
+												user.setUserPhoneNum(userPhoneNum);
+												break;
+											}else {
+												System.out.println("잘못된 전화번호입니다.");
+												continue;
+											}
+										}
+										user.setUserPhoneNum(userPhoneNum);
+									}else if(myinfochoice == 4) {
+										while(true) {
+											int regionChoice = 0 ;
+											String updateRegion = "";
+											String[] regionData = {"서울","경기", "인천", "강원", "충북", "울산","부산", "대구", "광주", "대전"
+													, "세종", "충남", "경북", "경남", "전북", "전남", "제주"};
+											for (int i = 0; i < regionData.length; i++) {
+												System.out.print(i+1+". "+regionData[i]+"\t");
+												if( (i+1) % 5 == 0) {
+													System.out.println();
+												}
+											}
+											System.out.println();
+											System.out.println();
+											System.out.println("변경할 거주지를 선택해주세요!");
+											regionChoice = sc.nextInt();
+											if (regionChoice > 0 && regionChoice <= regionData.length) {
+												updateRegion = userC.getRegion(regionChoice);
+												user.setUserRegion(updateRegion);
+												break;
+											}else {
+												System.out.println(chatBotName+"가 모르는 입력입니다...");
+												continue;
+											}
+
+
+										}
+									}else if(myinfochoice == 5){
+										System.out.println("나이 수정하기");
+									}else if(myinfochoice == 6) {
+										while(true) {
+											System.out.println("변경할 비밀번호를 입력해주세요! :");
+											pw = sc.next();
+											String result = userC.passwordFromCk(pw);
+											if(result.equals("pass")) {
+												user.setUserPw(pw);
+												break;
+											}else {
+												System.out.println(result);
+												continue;
+											}
+										}
+
+									}else if(myinfochoice == 7){
+										System.out.println("뒤로 가기");
+										break;
+									
+								}else {
+									System.out.println(chatBotName+"가 모르는 입력입니다... 이전 작업을 다시 시도합니다.");
+									continue;
+								}
+									
+								}
+
+
+
+
+								// 업데이트 메소드
 								
 								break;
 							}else if(choice == 2){
@@ -321,56 +447,76 @@ public class MainView {
 								// 2-1. searchArea()로 로그인한 유저의 지역과 비교하여 값 가져오기
 								//  2-2. 300명 이하이면 야외운동을 추천합니다 출력    				(향상 -> 운동 리스트중랜덤출력도 가능하다)
 								//  2-3. 300명 이상이면 홈트레이닝을 추천합니다 출력 				(향상-> 홈 트레이닝 운동 랜덤출력)
+								user = uDAO.getMyInfo();
 								System.out.println("코로나 확진자를 통한 운동추천");
 								int  coranaCnt = 0;
-								
-								records =	recordDAO.getALLRecord(user.getUserId());
-								for(UserRecordVO v:records) {
-									System.out.println(v);
-								}
-								
-								String data =coranaC.searchArea(user.getUserRegion());
 
+
+								String data =coranaC.findRegion(user.getUserRegion());
+
+								System.out.println( user.getUserName()+"님의 현재 설정 지역은 "+user.getUserRegion()+"입니다.");
+								System.out.println( user.getUserRegion()+"의 금일 확진자 수는 "+data+"명 입니다." );
 								if (data != null) {
-									
+
 									coranaCnt = Integer.parseInt(data) ;
 									if( coranaCnt >= 300) {
 										// 이상
 										System.out.println("홈 트레이닝을 추천합니다");
-										break;
+										//while문으로  홈 트레이닝 중 상체와 하체 운동을 사용자에게 입력받음
+										// 고른 부위의 운동 리스트를 선택하게 하여 바로 기록할지 말지를 입력받음
+										// 바로 기록한다면 랜덤으로 나온 운동의 기록을 시작함
+
+										continue;
 									}else {
 										// 이하 
 										System.out.println("야외 운동을 해보는건 어떨까요?");
-										break;
+										continue;
 									}
 									//
 								}else {
 									String data2 = coranaC.totalCorona();
-									
+									System.out.println("현재 지역별 코로나 확진자를 불러올 수 없습니다.");
+									System.out.println("전체 지역의 코로나 확진자를 기준으로 알려드립니다!");
 
-										 coranaCnt = Integer.parseInt(data2) ;
+									coranaCnt = Integer.parseInt(data2) ;
 									if( coranaCnt>= 1000) {
 										// 이상
-										System.out.println("홈 트레이닝을 추천합니다");
-										break;
+										System.out.println("홈 트레이닝을 추천합니다!");
+										continue;
 									}else {
 										// 이하 
 										System.out.println("야외 운동을 해보는건 어떨까요?");
-										break;
+										continue;
 									}
-									
-									
-									
+
+
+
 								}
 							}else if(choice ==3){
-								// 운동 기록  
-								// insertRecord(UserRecordVO record)로 넘겨줌
-								// 운동종목은 배열로 운동리스트 만들어서 사용자가 인덱스번호를 선택해서 운동값 insert해준다
-								// UserId(로그인된 객체에서 게터로 가져온다) , RecordTime,RecordExercise, RecordCount
-								
-								
-								
-								
+								user = uDAO.getMyInfo();
+								ArrayList<UserRecordVO> recods = recordDAO.getALLRecord(user.getUserId()) ;
+								/*								for(UserRecordVO v:recods) {
+
+									System.out.println(" ■■■■■ 운동기록 보기 ■■■■■");
+									System.out.println("| 날짜 :"+v.getRecordDate()+" | "+v.getUserId()+"님");
+									System.out.println("| "+v.getRecordExercise()+" |");
+									System.out.println("| "+v.getRecordTime()+"초"+" |");
+									System.out.println("| "+v.getRecordCount()+"번"+" |");
+								}*/
+
+								System.out.println(" ■■■■■ 운동기록 보기 ■■■■■");
+								for (int i = 0; i < recods.size(); i++) {
+
+
+									System.out.println("| 날짜 : "+recods.get(i).getRecordDate()+" | "+recods.get(i).getUserId()+"님");
+									System.out.println("▶"+recods.get(i).getRecordExercise());
+									System.out.println("▶"+recods.get(i).getRecordTime()+"초");
+									System.out.println("▶"+recods.get(i).getRecordCount()+"번");
+									System.out.println();
+								}
+
+
+
 							}else if(choice == 4){//나가기
 								break;
 							}else {
@@ -417,9 +563,38 @@ public class MainView {
 
 
 			}else if(choice == 3) {
+				// 비밀번호 찾기  
+				System.out.println(userMsgTab+"비밀번호를 까먹었어요.");
+				try {Thread.sleep(1000);} catch (InterruptedException e) {;}
+				System.out.println("걱정 말아요 ! 이"+chatBotName+"가 해결해줄께요! ");
+				try {Thread.sleep(500);} catch (InterruptedException e) {;}
+				System.out.println("전화번호를 입력해주세요!");
+				String useFindPhonNum = sc.next();
+				System.out.println("아이디를 입력해주세요!");
+				id = sc.next();
+
+				if(uDAO.sendNumber(useFindPhonNum,id)) {
+					System.out.println("전송받으신 확인 문자를 입력해 주세요!");
+					String ckSendNumber = sc.next();
+					if(uDAO.checkNumber(ckSendNumber)) {
+						System.out.println("인증번호 확인 성공!");
+						System.out.println("임시 비밀번호를 발급 해드릴께요!");
+						uDAO.sendTempPw(useFindPhonNum); // 발급후 문자 메시지 전송
+						uDAO.updateTempPw(id); //DB에 임시비밀번호 업데이트 
+						System.out.println("임시 비밀번호 발급성공!");
+						System.out.println("발급 받으신 비밀번호로 로그인해주세요!");
+					}else {
+						System.out.println("인증번호 확인에 실패 했습니다..ㅠㅠ 다시 시도 해주세요!");
+						continue;
+					}
+				}else{
+					System.out.println("정보를 찾을수 없습니다.");
+				};
+
+			}else if(choice == 4 ) {
 				System.out.println(userMsgTab+"그만할래요.");
 				try {Thread.sleep(1000);} catch (InterruptedException e) {;}
-				System.out.println(" 또 도움이 필요하면 빡빡이 아저씨를 찾아오세요! ");
+				System.out.println(" 또 도움이 필요하면"+chatBotName+"를 찾아오세요! ");
 				try {Thread.sleep(1000);} catch (InterruptedException e) {;}
 				System.out.println(chatBotName+"가 퇴장했습니다. ");
 				JoinCk = false;
@@ -429,6 +604,7 @@ public class MainView {
 				System.out.println(chatBotName+"가 모르는 입력입니다... 이전 작업을 다시 시도합니다.");
 				//JoinCk = false; 
 				continue;
+
 			}
 
 
