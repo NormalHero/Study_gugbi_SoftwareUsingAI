@@ -2,6 +2,7 @@ package view;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import controller.CoronaController;
@@ -132,12 +133,12 @@ public class MainView {
 				if (!joinFlag) {
 					continue;
 				}
-				
+
 				while(true) {
-				System.out.println("이름을 알려주세요!"); // 중복검사 필요
-				name = sc.next(); // 한글만 들어가게 메소드 구현@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-				if (userC.ckName(name)) {
-					break;	
+					System.out.println("이름을 알려주세요!"); // 중복검사 필요
+					name = sc.next(); // 한글만 들어가게 메소드 구현@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+					if (userC.ckName(name)) {
+						break;	
 					}else {
 						System.out.println("한글만 입력 해주세요 ㅠㅠ");
 					}
@@ -311,39 +312,38 @@ public class MainView {
 							ArrayList<UserRecordVO> records =new ArrayList<>();
 							UserVO user = new UserVO();
 							if(choice == 1){
+								boolean myPageFlag = true;
 								int myinfochoice = 0;
+								user = uDAO.getMyInfo();
 								String repw = "";
-								user=uDAO.getMyInfo();
-
-
 								System.out.println("비밀번호 재확인");
 								repw = sc.next();
-
 								// vo비밀번호랑 입력받은 비밀번호랑 같은지 확인
-								if(user.getUserPw().equals(repw)) {
-									System.out.println("일치");
+								if(user.getUserPw().equals(uDAO.encrypt(repw))) {
+									System.out.println("확인되었습니다 !");
 								}else {
-									System.out.println("비밀번호를 정확히 입력해 주세요!" );
-									repw = sc.next();
-								}
+									System.out.println("비밀번호가 틀리셨습니다." );
+									System.out.println();
+									continue;
+								 }
+								
 
 								//자기정보 
-								user = uDAO.getMyInfo();
 								java.util.Date utilDate = user.getUserAge(); //현재 날짜(자바 객체)
 
 								System.out.println();
 								System.out.println(user.getUserName()+"님의 마이페이지입니다!");
 
 								System.out.println();
-								while(true) {
-									System.out.println("수정 하려는 나의 정보를 선택하세요.");
+								while(myPageFlag) {
+									System.out.println("수정 하려면 나의 정보를 선택하세요.");
 									System.out.println("1.아이디 ▶ " + user.getUserId());
 									System.out.println("2.이름▶ " + user.getUserName());
 									System.out.println("3.전화번호 ▶ " + user.getUserPhoneNum());
 									System.out.println("4.지역 ▶ " + user.getUserRegion());
 									System.out.println("5.(만)나이 ▶ " + "만" + uDAO.getAge(utilDate)  + "살");
 									System.out.println("6.비밀번호 변경하기");
-									System.out.println("7.수정하지 않기");
+									System.out.println("7.나가기");
 									System.out.println();
 									System.out.println("원하는 버튼을 선택해 주세요");
 									//회원정보 수정
@@ -356,16 +356,17 @@ public class MainView {
 										continue;
 									}else if(myinfochoice == 2) {
 										while(true) {
-											System.out.println("이름을 알려주세요!"); // 중복검사 필요
-											String updateName = sc.next(); // 한글만 들어가게 메소드 구현@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+											System.out.println("이름을 알려주세요!"); 
+											String updateName = sc.next(); // 
 											if (userC.ckName(updateName)) {
+												user.setUserName(updateName);
 												break;	
-												}else {
-													System.out.println("한글만 입력 해주세요 ㅠㅠ");
-												}
+											}else {
+												System.out.println("한글만 입력 해주세요 ㅠㅠ");
 											}
+										}
 									}
-									
+
 									else if(myinfochoice == 3){
 										System.out.println("전화번호수정하기");   
 										String userPhoneNum = "";
@@ -427,21 +428,28 @@ public class MainView {
 
 									}else if(myinfochoice == 7){
 										System.out.println("뒤로 가기");
+										myPageFlag = false;
 										break;
-									
-								}else {
-									System.out.println(chatBotName+"가 모르는 입력입니다... 이전 작업을 다시 시도합니다.");
-									continue;
+
+
+									}else {
+										System.out.println(chatBotName+"가 모르는 입력입니다... 이전 작업을 다시 시도합니다.");
+										continue;
+									}
+
+
+									if(uDAO.updateMyInfo(user)) {
+										System.out.println("정보를 수정하였습니다!");
+									}else {
+										System.out.println("정보를 수정하지 못했어요 ㅠㅠ");
+									}
+									break;
 								}
-									
-								}
 
 
 
 
-								// 업데이트 메소드
-								
-								break;
+
 							}else if(choice == 2){
 								//  2. 코로나 크롤링			
 								// 2-1. searchArea()로 로그인한 유저의 지역과 비교하여 값 가져오기
@@ -462,11 +470,89 @@ public class MainView {
 									if( coranaCnt >= 300) {
 										// 이상
 										System.out.println("홈 트레이닝을 추천합니다");
+										while(true) {
+											 UserDAO dao = new UserDAO();
+										      UserRecordDAO rDao = new UserRecordDAO();
+										      
+										      user.setUserId("user1");      
+										      String[]  upperExercise = {"팔굽혀펴기","스파이더 플랭크","슈퍼맨로우"};
+										      String[]  lowerExercise = {"기본 스쿼트 ","내로우 스쿼트","프론트 런지 ","벤치 런지 ","점프 스쿼트"};
+										      Random random = new Random();
+										      
+										      
+
+										      int exChoice = 0;
+										      int recordCount = 0;
+										      int recordTime = 0;
+										      
+										      String result = "";
+										      while (true) {
+										         System.out.println("1.상체운동 2.하체운동");
+										         exChoice = sc.nextInt(); 
+										         if (exChoice == 1) {
+										            
+										             result = upperExercise[random.nextInt(upperExercise.length)];
+										             break;
+										            
+										         }else if(exChoice == 2) {
+
+										             result =upperExercise[random.nextInt(lowerExercise.length)];
+										             break;
+										         }else {
+										            
+										            System.out.println("빡빡이가 아저씨가 모르는 값이에요..");
+										            continue;
+										         }
+										      }
+										      System.out.println("빡빡이 아저씨의 추천 홈트레이닝은 "+result+"입니다!");
+										      System.out.println("운동을 시작해주세요!");
+										      System.out.println();
+										      System.out.println("운동을 기록합니다!");
+										      
+										      while(true) {
+										         System.out.println(result+"를 몇 회 하셨나요?");
+										         recordCount = sc.nextInt();
+										         if (recordCount <= 0  ) {
+										            System.out.println("적어도 1개는 하셨어야죠...다시 하고 오세요!");
+										            continue;
+										         }else if(recordCount > 1000 ) {
+										            System.out.println("너무 심한 운동은 오히려 건강에 좋지 않습니다 ... 다음엔 운동량을 줄여보세요!");
+										            break;
+										         }
+										         break;
+										      }
+										      
+										      while(true) {
+										         System.out.println("운동한 시간을 알려주세요!");
+										         System.out.println("시간 :");
+										         recordTime += sc.nextInt()*3600;
+										         System.out.println("분 : ");
+										         recordTime += sc.nextInt()*60;
+										         System.out.println("초 : ");
+										         recordTime += sc.nextInt();
+										         if (recordTime <= 0  ) {
+										            System.out.println("운동을 하신게 맞나요... 적어도 1초는 하셔야죠!  ");
+										            continue;
+										         }else if(recordTime >= 10800 ) { // 3시간
+										            System.out.println("너무 심한 운동은 오히려 건강에 좋지 않습니다 ... 다음엔 운동량을 줄여보세요!");
+										            break;
+										         }
+										         break;
+										      }
+										      
+										      
+										      
+//										      UserRecordVO rVo = new UserRecordVO(user.getUserId(), recordTime, result, recordCount);
+										      UserRecordVO rVo = new UserRecordVO();
+										      
+										      rDao.insertRecord(rVo);
+
+										      continue;
+										}
 										//while문으로  홈 트레이닝 중 상체와 하체 운동을 사용자에게 입력받음
 										// 고른 부위의 운동 리스트를 선택하게 하여 바로 기록할지 말지를 입력받음
 										// 바로 기록한다면 랜덤으로 나온 운동의 기록을 시작함
 
-										continue;
 									}else {
 										// 이하 
 										System.out.println("야외 운동을 해보는건 어떨까요?");
@@ -518,9 +604,10 @@ public class MainView {
 
 
 							}else if(choice == 4){//나가기
+								cancelLogin = false;
 								break;
 							}else {
-								System.out.println("뒤로 갑니다.");
+								System.out.println(chatBotName+"가 모르는 입력입니다... 이전 작업을 다시 시도합니다.");
 							}
 						}               
 
@@ -612,17 +699,6 @@ public class MainView {
 
 		}
 
-
-
-
-
-
-
 	}
-
-
-
-
-
 
 }

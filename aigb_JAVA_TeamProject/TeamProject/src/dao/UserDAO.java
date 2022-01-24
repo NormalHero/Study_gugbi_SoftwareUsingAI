@@ -20,9 +20,9 @@ import vo.UserVO;
 
 public class UserDAO {
 		
-	String api_key = "NCSTFZGSGACJE9SI"; // 자신의API 키 
-	String api_secret = "WW3ZOL6NAB2G0XATZRY0OFNXJDZBRAMF"; // API SECRET KEY
-	 String coolSMSPhonNum ="01037325638";
+	String api_key = "NCSTLDI4YOFAFBDH"; // 자신의API 키 
+	String api_secret = "N1FVJOXIPM0XU7KHPPHDEH9DPMMLFADS"; // API SECRET KEY
+	 String coolSMSPhonNum ="01034761163";
 	
 	   public static int userNumber= 2; //테스트를 위한 임의에 회원번호 
 	   public static String number;
@@ -43,8 +43,7 @@ public class UserDAO {
 	         conn = DBConnecter.getConnection();
 	         pstm = conn.prepareStatement(query);
 	         pstm.setString(1, id);
-//	         pstm.setString(2, encrypt(pw));
-	         pstm.setString(2, pw);
+	         pstm.setString(2, encrypt(pw));
 	         rs = pstm.executeQuery();
 	         
 	         if(!rs.next()) { //로그인 실패
@@ -152,8 +151,7 @@ public class UserDAO {
 	              conn = DBConnecter.getConnection();
 	              pstm = conn.prepareStatement(query);
 	              pstm.setString(1, user.getUserId());
-//	              pstm.setString(2, encrypt(user.getUserPw()));
-	              pstm.setString(2, user.getUserPw());
+	              pstm.setString(2, encrypt(user.getUserPw()));
 	              pstm.setString(3, user.getUserName());
 	              pstm.setDate(4,  user.getUserAge());
 	              pstm.setString(5, user.getUserPhoneNum());
@@ -269,7 +267,6 @@ public class UserDAO {
 			         conn = DBConnecter.getConnection();
 			         pstm = conn.prepareStatement(query);
 			         pstm.setString(1, id);
-//			         pstm.setString(2, encrypt(pw));
 			         pstm.setString(2, phoneNumber);
 			         rs = pstm.executeQuery();
 			         
@@ -453,8 +450,7 @@ public class UserDAO {
 		         try {
 		            conn = DBConnecter.getConnection();
 		            pstm = conn.prepareStatement(query);
-		            pstm.setString(1, tempPw);
-//		            pstm.setString(1, encrypt(tempPw));
+		            pstm.setString(1, encrypt(tempPw));
 		            pstm.setString(2, id);
 		            pstm.executeUpdate();
 		         } catch (SQLException e) {
@@ -501,6 +497,46 @@ public class UserDAO {
 			      }
 		      
 		      
+		      public boolean updateMyInfo(UserVO user) {
+		    	  boolean flag =true;
+		            UserVO vo = new UserVO();
+		            
+		            String query ="UPDATE USERTABLE SET  USERPW=?, USERNAME=?,  USERPHONNUM=?,  USERREGION=? WHERE USERNUM=?";
+		         
+		            
+//		            if (userNumber == 0) {return null;} 
+		            try {
+		               conn = DBConnecter.getConnection();
+		               pstm = conn.prepareStatement(query);
+		               pstm.setString(1, encrypt(user.getUserPw()));
+		               pstm.setString(2, user.getUserName());
+		               pstm.setString(3, user.getUserPhoneNum());
+		               pstm.setString(4, user.getUserRegion());
+		               pstm.setInt(5, userNumber);
+		               
+		               pstm.executeUpdate();
+		               
+		               
+		            } catch (SQLException e) {
+		            	flag =false;
+		            	System.out.println("updateMyInfo() 오류");
+		               // 리턴 false
+		            } finally {
+		               try {
+		                  if(pstm != null) {
+		                     pstm.close();
+		                  }
+		                  if(conn != null) {
+		                     conn.close();
+		                  }
+		               } catch (SQLException e) {
+		                  throw new RuntimeException(e);
+		               }
+		            }
+		            return flag;
+		             
+		      }
+		      
 		 
 			
 		      
@@ -508,11 +544,9 @@ public class UserDAO {
 		      public String encrypt(String pw) {
 		          String en_pw = "";
 		          for(int i = 0; i<pw.length(); i++) {
-		             en_pw += pw.charAt(i)*3;
+		             en_pw += (char)(pw.charAt(i)*KEY);
 		          }
 		          return en_pw;
 		       }
-	   
-		      
-	   
+ 
 }

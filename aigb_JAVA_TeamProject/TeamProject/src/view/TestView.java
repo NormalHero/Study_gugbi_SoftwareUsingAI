@@ -30,6 +30,192 @@ public class TestView {
 		Scanner sc = new Scanner(System.in);
 		userController userC = new userController();
 		
+		
+		
+		
+		
+		
+		
+		
+
+		int  ExHomechoice =0, ExOutchoice=0, out = 500, Ex =0,  rex=0;
+//		운동횟수
+		int ExCount0, ExCount1, ExCount2,ExCount3;  
+		
+
+		
+		
+	while(true) {
+		System.out.println("1.운동하기\n2.기록하기");
+		rex= sc.nextInt();
+		if(rex==1) {
+//				케이스 while
+		while(true) {
+			
+		
+		
+			if(out >= 300) {
+			
+			System.out.println("오늘은 홈트레이닝을 해보시는게 어떠신가요?");	
+			
+			System.out.println("1.상체운동 2.하체운동");
+			ExHomechoice = sc.nextInt();
+					switch(ExHomechoice) {		
+		
+					case 1 :
+					System.out.println("상체 운동을 선택 하셧습니다.\n");
+					try {Thread.sleep(500);} catch (InterruptedException e) {;}
+					
+					System.out.println("빡빡이 아저씨의 추천 루틴.\n");	
+//					상체  while
+					while(true) {
+					System.out.println("1.팔굽혀펴기 20회 *5번\n2.스파이더 플랭크 20회*5세트 \n3.슈퍼맨로우 15회 * 5세트\n4.돌아가기\n\n");
+					System.out.println("운동 방법 보기(숫자선택)");
+					Ex = sc.nextInt();
+					
+					
+						if(Ex ==1) {
+							System.out.println("팔굽혀펴기");
+							break;
+						}else if(Ex==2) {				
+							System.out.println("스파이더 플랭크");
+							break;
+						}else if(Ex==3) {				
+							System.out.println("슈퍼맨로우 15회");
+							break;
+						}else if(Ex==4) {				
+							System.out.println("돌아가기");
+							break;
+						}else {
+							System.out.println("잘못입력하셧습니다");
+							
+						}
+					}
+						
+					break;
+					
+					case 2 : 
+					System.out.println("하체운동을 선택하셧습니다.");
+//					하체 while
+					while(true) {
+					System.out.println("1.기본 스쿼트 20REP * 3SET\n2.내로우 스쿼트 20REP * 3SET.\n3.프론트 런지 각각 15REP*3SET.\n4.벤치 런지 각각 15REP*3SET.\n5.점프 스쿼트 15REP*3SET.\n6.돌아가기");
+					System.out.println("운동 방법 보기(숫자선택)");
+					Ex = sc.nextInt();
+					
+					
+						if(Ex ==1) {
+							System.out.println("기본 스쿼트 ");
+							break;
+						}else if(Ex==2) {				
+							System.out.println("내로우 스쿼트");
+							break;
+						}else if(Ex==3) {				
+							System.out.println("프론트 런지");
+							break;
+						}else if(Ex==4) {				
+							System.out.println("벤트 런지");
+							break;
+						}else if(Ex==5) {				
+							System.out.println("점프 스쿼트");
+							break;
+						}else if(Ex==6) {				
+							System.out.println("돌아가기");
+							break;
+						}else {
+							System.out.println("잘못입력하셧습니다");
+							
+						}	}
+					break;
+		
+					default:
+					System.out.println("잘못입력하셧습니다");
+					break;
+			}
+
+					break;
+		}
+		
+		else {
+			
+			System.out.println("오늘은 헬스장을 가보는게 어떤가요?");
+			
+			System.out.println("\n1.상체운동 2.하체운동 3.유산소운동");
+			ExOutchoice = sc.nextInt();
+			switch(ExOutchoice) {
+			
+			case 1 :
+					System.out.println("상체 운동을 선택 하셧습니다.");		
+					System.out.println("1.체스트프레스(가슴)\n2.펙덱플라이(가슴)\n3.숄더프레스(어깨)\n4.레터럴머신(어깨)\n5.랫풀다운(등)\n5.로윙머신(등)\n6.암컽머신(이두)");
+					break;
+			case 2 : 
+					System.out.println("하체운동을 선택하셧습니다.");
+					System.out.println("1.레그 익스텐션\n2.레그컬(등)\n3.힙 어브덕션(삼두)\n4.바벨 스쿼트(이두)\n5.레그프레스");
+					break;
+		
+			}
+			
+		}
+		}
+		break;
+		}
+		else if(rex==2) {	
+		System.out.println("운동기록을 하기");
+		
+		System.out.println("팔굽 몇회?" );
+		ExCount0 =sc.nextInt();
+		
+		System.out.println("스파이더 플랭크 몇회?" );
+		ExCount1 =sc.nextInt();	
+		
+		System.out.println("슈퍼맨로우 몇회?" );
+		ExCount2 =sc.nextInt();	
+		
+		System.out.println("팔굽"+ExCount0+"회"+"\n스파이더 플랭크"+ExCount1+"회"+"\n슈퍼맨로우"+ExCount2+"회");
+		break;
+		}
+		
+		
+	}
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
 //		Date resultDate = Date.valueOf("2002-12-21"); 
 //		user.setUserAge(resultDate);
 //		

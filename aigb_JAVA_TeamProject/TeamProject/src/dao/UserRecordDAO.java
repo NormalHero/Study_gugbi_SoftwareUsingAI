@@ -82,7 +82,6 @@ public class UserRecordDAO {
 	               pstm.execute();
 	               
 	            } catch (SQLException e) {
-	            	
 	               System.out.println("insertRecord() SQL 오류");
 	               
 	            } catch (Exception e) {
