@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테스트</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    let msg1 = "출근";
+    let msg2 = "휴일";
+    let allDate = [["월",msg1],["화",msg1],["수",msg1],["목",msg1],["금",msg2],["토",msg2],["일",msg2]];
+    // let holiday = ["금","토","일"];
+    let day = prompt("요일을 입력하세요!")
+    for (let i = 0; i < allDate.length; i++) {
+           if(allDate[i][0] === day){
+            document.write("<p>"+allDate[i][0]+"요일은 "+allDate[i][1]+"</p>");
+         
+            
+        }
+        
+    }
+        document.write("<pre>")
+        document.write("<hr>")
+        document.write("</pre>")
+    
+
+
+
+    
+</script>
+</html>
