@@ -17,6 +17,7 @@ Visual Code 테마 변경
 	Alt + Shift + 방향키 : 한 줄 복사
 	Ctrl + x : 한 줄 잘라내기(삭제할 때 자주 사용)
 	Ctrl + Alt + 방향키 : 그리드 모드, 종료 시 esc
+	F2 : 전체 이름 변경
 
 HTML 기본 단축키
 	1. 태그명(요소명) 작성 후 Tab
