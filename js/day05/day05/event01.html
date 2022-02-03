@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클릭 이벤트</title>
+</head>
+<body>
+    <h3>CSS 스타일 동적 변경</h3>
+    <hr>
+    <p>
+        나비가 <span>팔랑팔랑 날고 있어요.</span>
+    </p>
+    <input type="button" value="스타일 변경">
+</body>
+    <script>
+        const span = document.getElementsByTagName("span")[0]
+        const input = document.querySelector("input[type='button']");
+
+        // 콜백함수
+        input.addEventListener('click',function(){
+            this.style.background = "yellow";
+            span.style.fontSize ="30px";
+            span.style.border = "3px dotted magenta";
+            span.style.width = "10vw";
+            span.style.display ="inline-block"
+        }); 
+
+
+
+
+        // on~~ 등에 값을 넣는것이 아닌 기능을 넣는다 
+        // 기능은 함수, 핸들러
+        // onclick은 input의 프로퍼티
+        // input.onclick = function(){
+        //     console.log(this);
+        //     this.style.background = "yellow";
+        //     span.style.fontSize ="30px";
+        //     span.style.border = "3px dotted magenta";
+        //     span.style.width = "10vw";
+        //     span.style.display ="inline-block"
+        // }
+        
+    </script>
+</html>

@@ -65,7 +65,7 @@ function intro(age, name, gender){
     //외부에서 전달받은 값의 개수가 2개라면
     if(arguments.length == 2){
         //name변수에 들어온 값에 "남" 또는 "여"라는 문자열이 포함되어 있다면,
-        if(name.includes("남" || "여")){
+        if(name.includes("남") || name.includes("여")){
             genderMsg = name; //genderMsg에 name(성별)을 넣어주고
             nameMsg = "무명(no name)"; //이름은 입력받지 않았기 때문에 무명을 넣어준다.
         }else{
@@ -82,7 +82,7 @@ function intro(age, name, gender){
     console.log(genderMsg);
 }
 
-intro(10, '한동석');
+intro(20, '여자');
 
 //문자열에 있는 includes()메소드에 조회할 값을 전달하면,
 //포함되어 있을 때 true, 없을 때에는 false이다.
