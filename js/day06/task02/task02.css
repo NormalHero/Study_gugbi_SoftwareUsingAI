@@ -1,0 +1,45 @@
+div#content{
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+}
+fieldset{
+    border-top: dashed 7px #ca64f4;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    text-align: center;
+    margin-top: 50px;
+    
+}
+fieldset legend{
+    font-family: 'Black Han Sans', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+}
+fieldset p{
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 20px;
+}
+input#insert{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid black;
+    width: 300px;
+    text-align: center;
+}
+input#btn{
+    font-family: 'Black Han Sans', sans-serif;
+   
+    margin-top: 2px;
+    width: 90px;
+    height: 35px;
+    font-size: 27px;
+    color: white;
+    background-color: #ca64f4;
+    border:none;
+   
+    
+}
+input#insert:focus {outline:none;}
