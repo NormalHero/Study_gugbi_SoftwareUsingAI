@@ -1,0 +1,87 @@
+
+div#content{
+    width: 800px;
+    height: 800px;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+fieldset{
+    border-top: 4px solid #176BAD;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+    font-family: 'Do Hyeon', sans-serif;
+}
+fieldset legend{
+   
+    font-size: 32px;
+    font-weight: bold;
+    color:#108174;
+}
+fieldset p{
+    font-size: 20px;
+}
+
+div#img{
+    width: 290px;
+    height: 170px;
+    background-image: url("img01.png");
+    background-size: 100% 100%;
+    margin: 0 auto;
+    border:3px solid #108174;
+}
+input#pwInput{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid #108174;
+    width: 400px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 16px;
+}
+input#pwInput:focus {outline:none;}
+input::placeholder {
+    color: black;
+    
+  }
+  div#btnWrap{
+    
+     
+      width: 100%;
+        height: 100px;
+
+      
+  }
+  input#btnOn{
+    width: 30%;
+    
+    float: left;
+  margin-right: 1.5%;
+  margin-left: 3.5%;
+}
+input#btnOff{
+    width: 30%;
+    float: left;
+    margin-right: 1.5%;
+}
+input#btnReset{
+    width: 30%;
+    float: left;
+    margin-right: 3.5%;
+}
+div#btnWrap input{
+    background-color: #42A5F5;
+    color: #176BAD;
+    height: 38px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Do Hyeon', sans-serif;
+}
