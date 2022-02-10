@@ -29,36 +29,33 @@
 
 <table>
 
+
 <%
-for (int i = 0; i < 5; i++) {
+int k = 0;
+for(int j = 1; j<11; j++) {
 	%>
 	<tr>
 	<%
-    for (int j = 0; j <= i; j++) {
-        %>
-        	<td>ㅇㅇㅇ</td>
-        <%
-    }
-    %>
-    	</tr>
-    <%
-}
+	for(int i = 0; i<=k; i++) {
+		%>
+		<td>ㅇㅇㅇ</td>
+		<%
+	}
+	if(j<5) { 
+		k++;
+	}
+	else { 
+		k--;
+	}
 %>
+	</tr>
 <%
-for (int i = 0; i < 5; i++) {
-	%>
-	<tr>
-	<%
-    for (int j = 0; (i+j)<5; j++) {
-        %>
-        	<td>ㅇㅇㅇ</td>
-        <%
-    }
-    %>
-    	</tr>
-    <%
 }
 %>
+
+
+
+
 
 
 </table>
