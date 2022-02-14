@@ -31,7 +31,22 @@ public class MemberDAO {
       } catch (SQLException e) {
          System.out.println("getInfo(String) SQL 오류");
          e.printStackTrace();
-      }
+      }finally {
+		try {
+			if(rs!=null) {
+				rs.close();
+			}
+			if(pstm!=null) {
+				pstm.close();
+			}
+			if(conn!=null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		
+	}
       return members;
    }
 }
