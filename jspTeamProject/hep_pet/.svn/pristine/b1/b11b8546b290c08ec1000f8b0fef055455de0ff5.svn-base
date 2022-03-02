@@ -1,0 +1,172 @@
+   @font-face {
+    font-family: 'ONE-Mobile-Title';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-Title.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+	    font-family: 'ONE-Mobile-Title';
+   background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+
+.header_util span a{
+    text-decoration: none;
+    color: black;
+   
+  
+}
+
+.in_page_wrap{
+    
+    background: transparent;
+
+    padding: 0;
+    margin: 0;
+}
+
+
+  .header_color{
+  background-color: rgba(255,255,255,0.8);
+    border-bottom: 1px solid #ddd;
+ } 
+div.header_fixed{
+    
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 999;
+    text-align: center;
+   
+    min-width: 1200px;
+}
+div.header_flex{
+	background-color:white;
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#header_btn{
+    border: none;
+    background-color: #fff;
+}
+
+.nav_header{
+   
+    background-color: rgba(255,255,255,0.8);
+   
+    width: 100%;
+    margin: 0 auto;
+   
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    padding: 12px 0px;
+    border: none;
+    margin-bottom: 0;
+    cursor: pointer;
+    
+}
+
+.nav_header_li{
+ 
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;    
+    width: 200px;
+    height: 50px;
+    padding: 0 15px;
+  
+ 
+}
+.nav_header_li span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     font-size: 20px;
+  
+   
+    width: 200px;
+    height: 50px;
+}
+.nav_sub_header{
+   
+  
+    list-style: none;
+    padding-left: 0;
+    display: none;
+   
+}
+
+/* #cat ::before{
+content: url("https://minipetmall.co.kr/upload/goods_data/222022550210652.jpg");
+position: absolute;
+top: 0;
+background-size: 50%;
+width: 50px;
+height: 50px;
+left: 0;
+} */
+
+.heaver_nav{
+
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+a img{
+    width: 100%;
+    height: 100%;
+}
+.nav_sub_header_li{
+    justify-items: center;
+ 
+    
+    /* margin: 0 auto; */
+    padding-top: 10px;
+    height: 50px;
+}
+.nav_header_li a{
+    text-decoration: none;
+    color: black;
+}
+.nav_sub_header_li a{
+  
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+ }
+
+ .main_page_banner_text{
+     position: absolute;
+     top: 150px;
+     left: 90px;
+ }
+
+
+ .nav_header_li span:hover{
+     background-color:rgba(255, 190, 10, 0.8);
+     color:  white;
+     border-radius: 2rem;
+ }
+.nav_sub_header_li :hover{
+    background-color: rgba(255, 190, 10, 0.8);
+    color:  white;
+    border-radius: 1rem;
+}

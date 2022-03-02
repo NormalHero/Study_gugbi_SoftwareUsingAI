@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>1:1 온라인 문의</title>
+<link rel="stylesheet" href="/hep_pet/WebContent/assets/css/onlineQ&A.css">
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+    <!-- Top -->
+    <header>
+        <div class="img">
+            <div class="inner_txt">
+                <h2>1:2 온라인 문의</h2> 
+                <p>문의사항을 남겨주시면 빠른 시간에 답변드리겠습니다.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Middle -->
+    <form class="wrap" name="inputForm">
+        <div class="wrap_mid">
+            <strong class="tit">연락 받으실 정보를 남겨주세요.
+                <span class="necessary"><b>*필수</b>
+                    입력 정보
+                </span>
+            </strong>
+            <table class="info">
+                <tr class="line">
+                    <td class="col1"><label for="userName" class="userName" >이름</label></td>
+                    <p id="nameCheck"></p>
+                    <td class="col2">
+                        <input type="text" name="input" class="input">
+                        <img src="" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><label for="userEmail" class="userEmail"></label>이메일</td>
+                    <p id="emailCheck"></p>
+                    <td class="col2">
+                        <input type="text" name="input" class="input"><span>@</span>
+                        <div class="selectset" style="width: 200px;">
+                            <select class="emailSelect" name="emailSelect" title="이메일선택">
+                            <option value="">메일선택</option>
+                            <option value="naver.com">naver.com</option>
+                            <option value="daum.net">daum.net</option>
+                            <option value="hanmail.net">hanmail.net</option>
+                            <option value="nate.com">nate.com</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <option value="직접입력">직접입력</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><label for="userTitle"></label>제목</td>
+                    <td class="col2">
+                        <input type="text" name="input" class="input">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><label for="userContent" class="userContent"></label>문의내용</td>
+                    <p id="contentCheck"></p>
+                    <td class="col2">
+                        <textarea  placeholder="1000자 이내로 입력하세요." name="userContent" id="userContent" >
+                        </textarea>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        <div class="btn">
+            <input type="button" class= "submit_btn" value="확인" onclick="check()">
+        </div>
+        </div> 
+    </form>
+    <!-- Footer -->
+<script src="/hep_pet/WebContent/assets/js/onlineQ&A.js"></script>
+</body>
+</html>
