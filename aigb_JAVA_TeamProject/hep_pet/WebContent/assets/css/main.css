@@ -1,0 +1,221 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.main_page_banner_text{
+    position: absolute;
+    top: 150px;
+    left: 90px;
+}
+
+
+.main_visual{
+    margin-bottom: 150px;
+}
+
+ /* 메인끝  */
+.imgpet_wrap{
+    text-align: center;
+}
+
+
+.hover_text{
+  
+  position: absolute;
+  width: 400px;height: 300px;
+  margin: 0 auto;
+  color: white;
+  background-color: black;
+}
+/* ㅠㅠ */
+
+.slideshow-container {
+    max-width: 1650px;
+    position: relative;
+    margin: auto;
+  }
+  
+  
+  .mySlides {
+    display: none;
+  }
+  
+.slide_btn{
+   
+    text-align: center;
+    margin-top: 20px;
+    
+}
+.prev, .next{
+   cursor: pointer;
+    font-size: 30px;
+    padding:0 80px ;
+    border-radius: 1rem;
+}
+.prev:hover, .next:hover {
+    background-color: #EEC0DB;
+  } 
+  
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+/* 두번째 오토 슬라이드 */
+.automySlides {display: none;}
+img {vertical-align: middle;}
+
+.autoslideshow-container {
+  max-width: 1650px;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 150px;
+  margin-top: 100px;
+  
+}
+
+
+.autodot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.autoactive {
+  background-color: #717171;
+}
+
+
+.autofade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+
+
+/* 슬라이드 배너 끝 */
+
+div.second_contain{
+   
+    background: #fafafa url("https://www.yongin.go.kr/resources/user/pet/img/main/step_bg.jpg")no-repeat center top;
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    padding-bottom: 80px;
+    margin-bottom: 60px;
+}
+div.sbox{
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+    z-index: 100;
+}
+div.s_sub_box{
+    margin: 0 auto;
+    display: table;
+}
+div.s_sub_box >img{
+    display: table-cell;
+    width: 100%;
+    padding-top: 85px;
+}
+div.s_sub_tex{
+    display: table-cell;
+    width: 570px;
+    padding: 0 50px;
+     
+    text-align: left;
+    vertical-align: middle;
+    box-sizing: border-box;
+    
+}
+
+/* 세션끝 */
+.quick_nav{
+    margin-top: -65px;
+    padding-bottom: 90px;
+}
+.q_nav{
+   
+    position: relative;
+    width: 1200px;
+    
+    margin: 0 auto;
+    z-index: 100;
+}
+.q_nav_ul{
+   
+    width: 919px;
+    margin: 0 auto;
+
+    box-shadow: 0 3px 10px rgb(0 0 0 / 10%);
+    list-style: none;
+}
+.q_nav_li{
+    background-color:antiquewhite;
+    border-radius: 10px ;
+    position: relative;
+    float: left;
+    width: 180px;
+    text-align: center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    transition: .3s;
+    
+    height: 130px;
+}
+.q_nav_a{
+    padding-top: 50px;
+    display: table-cell;
+    width: 180px;
+    height: 100%;
+   
+} 
+/* .q_nav_ul :hover{
+    transform:  scale(1.5);
+    
+} */
+
+
+/* .q_nav ul li:not(:first-child)::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 1px;
+    height: 100px;
+    background-color: #ddd;
+    z-index: 0;
+} */

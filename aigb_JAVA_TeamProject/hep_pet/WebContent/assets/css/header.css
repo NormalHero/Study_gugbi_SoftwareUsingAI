@@ -1,0 +1,352 @@
+   @font-face {
+    font-family: 'ONE-Mobile-Title';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-Title.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+/* 폰트 적용 존 */
+.header_util{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.heaver_nav{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+/*  */
+body{
+
+
+    padding: 0;
+    margin: 0;
+    
+}
+#loginbtn::after{
+    content: "｜";
+  font-size: 20px;
+    line-height: 1px;
+    color: #ddd;
+}
+
+
+#loginbtn{
+   
+    cursor: pointer;
+}
+.header_util {
+    margin-top: 50px;   
+    margin-left: 100px;
+}
+.header_util span a{
+    text-decoration: none;
+    color: black;
+   
+  
+}
+
+.in_page_wrap{
+    
+    background: transparent;
+
+    padding: 0;
+    margin: 0;
+}
+
+
+  .header_color{
+    background-color:white;
+    border-bottom: 1px solid #ddd;
+ } 
+
+div.header_fixed{
+    
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    height: 10px;
+    width: 100%;
+    z-index: 999;
+    text-align: center;
+   
+    min-width: 1200px;
+}
+div.header_flex{
+    display: flex;
+	background-color:white;
+    max-width: 1500px;
+    height: 80px;
+    width: 100%;
+    margin: 0 auto;
+    
+    justify-content: space-around;
+    align-items: center;
+}
+
+#header_btn{
+    border: none;
+    background-color: #fff;
+}
+
+.nav_header{
+   
+    background-color: #fff;
+   
+    width: 100%;
+    margin: 0 auto;
+   font-weight: 550;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    padding: 12px 0px;
+    border: none;
+    margin-bottom: 0;
+    cursor: pointer;
+    
+}
+
+.nav_header_li{
+
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;    
+    width: 200px;
+    height: 50px;
+    padding: 0 ;
+  
+ 
+}
+.nav_header_li span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     font-size: 20px;
+    
+   
+    width: 200px;
+    height: 50px;
+}
+.nav_sub_header{
+
+  background-color:white;
+    list-style: none;
+    padding-left: 0;
+    display: none;
+   
+}
+
+/* #cat ::before{
+content: url("https://minipetmall.co.kr/upload/goods_data/222022550210652.jpg");
+position: absolute;
+top: 0;
+background-size: 50%;
+width: 50px;
+height: 50px;
+left: 0;
+} */
+
+/* .heaver_nav{
+    border-bottom: 1px solid black;
+    position: relative;
+    display: flex;
+    max-width: 1920px;
+    min-width: 1440px;
+    width: 100%;
+    height: 90px;
+    margin: 0 auto;
+    padding: 0 3%;
+    background: #fff;
+    z-index: 40;
+} */
+
+
+.nav_sub_header_li{
+    justify-items: center;
+ 
+    
+    /* margin: 0 auto; */
+    padding-top: 10px;
+    height: 50px;
+}
+.nav_header_li a{
+    text-decoration: none;
+    color: black;
+}
+.nav_sub_header_li a{
+  
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+ }
+
+
+ .main_page_banner_text{
+     position: absolute;
+     top: 150px;
+     left: 90px;
+ }
+
+
+ .nav_header_li span:hover{
+     background-color:rgba(255, 190, 10, 0.8);
+     color:  white;
+     border-radius: 2rem;
+ }
+.nav_sub_header_li :hover{
+    background-color: rgba(255, 190, 10, 0.8);
+    color:  white;
+    border-radius: 1rem;
+}
+
+
+/* 
+모달
+
+
+*/
+
+#modle_main{
+   display: none;
+    width: 468px;
+    height: auto;
+    border:  none;
+    position: fixed;
+    top:40%;
+    left: 50%;
+    margin: -200px 0 0 -250px;
+    background: cornsilk;
+    z-index: 99999999999;
+    border-radius: 1em;
+}
+
+#login_fied{
+    
+  
+    
+    border:  none;
+    width: 400px;
+    height: auto;
+    margin:  0 auto;
+  
+    text-align: center;
+}
+#modal_close{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+#modal_close_btn{
+    color: black;
+    cursor: pointer;
+}
+#login_main_div{
+    width: 80%;
+    margin: 0 auto;
+}
+#model_login{
+    text-align: left;
+}
+
+#model_login_id{
+    margin-top: 10%;
+}
+
+input[type="text" ]#model_input_id {
+    margin-top: 5%;
+    width: 100%;
+    height: 35px;
+}
+
+#model_login_pw{
+    margin-top: 10%;
+
+}
+#model_intput_pw{
+    margin-top: 5%;
+    width: 100%;
+    height: 35px;
+}
+
+#model_login_login{
+    margin-top: 10%;
+
+}
+#model_login_login > input[type="button"] {
+    width: 103%;
+    height: 35px;
+}
+
+#model_login_footer{
+    width: 103%;
+    text-align: left;
+    margin-top: 5%;
+}
+.search{
+    float: right;
+}
+hr{
+    margin-top: 5%;
+    width: 250px;
+}
+#joinA{
+    cursor: pointer;
+}
+
+#model_api_login{
+   
+    width: 103%;
+}
+ul{
+    width: 100%;
+    padding: 0;
+    margin: 0;    
+    list-style-type: none;
+    
+
+}
+.naverlogin{
+  
+    margin-top: 3%;
+    border: 1px solid black ;
+}
+#naver_id_login{
+    width: 100%;
+}
+.kakaologin{
+    margin-top: 3%;
+    border: 1px solid black ;
+}
+.googlelogin{
+    margin-top: 3%;
+    border: 1px solid black ;
+}
+
+
+
+/* input[type=text]:focus{
+    border: none;
+    outline: 1px solid red;
+
+
+} */
