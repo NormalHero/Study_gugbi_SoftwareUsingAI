@@ -15,11 +15,11 @@ $(document).ready(function(){
 	 var email =$('#useremail');
 	 var phone  =$('#userphone');
 	 
-$('#userid').on("propertychange change keyup paste input" ,function(event) {
+$('#userid').on('keyup' ,function(event) {
 	if(!idReg.test($('#userid').val() ) ) {
-        $('#list1').html("<i class='none_text'>i  영문자로 시작하는 6~20자 ");
+        $('#list1').html("<span class='none_text'></span> !영문자로 시작하는 6~20자");
         } else {
-    	$('#none_text').html("<span>사용가능</span>");
+    	$('#list1').html("<h1 class='pass_text'></h1> 사용가능");
     }
 })
 
@@ -100,7 +100,4 @@ function checkjoin() {
         }
 
     }
-
-
-
 // 이거왜 name은 인식하고ㅓ id는 왜 인식못함 ㅜㅜ

@@ -1,12 +1,8 @@
 
-body{
-	margin: 0 auto;
-}
 
 .page-header{
     margin: 10%;
 }
-
 .img{
     background: url('http://www.costar.co.kr/img_up/shop_pds/costa20/design/sub_img/banner_05.jpg')
     no-repeat;
@@ -115,7 +111,6 @@ table tr td.col2 userName{
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
 #userName.input, #userEmail.input, input.input{
 	border: 1px solid #ccc;
 }

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+#body_wrap{
+    margin: 0 auto;
+}
+
+.top_title p{
+    font-size: 30px;
+    display: inline-block
+}
+.location{
+    display: inline-block
+}
