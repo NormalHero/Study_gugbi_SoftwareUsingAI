@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+   <!-- 아이디 중복검사 -->
+   <select id="checkId" parameterType="string" resultType="_int">
+      select count(userId) from tbl_user 
+      where userId = #{userId}
+   </select>
+   
+   
+   
+   <!-- 회원 가입 -->
+   <insert id="join" parameterType="userVO">
+   
+      insert into tbl_user
+      (userName, userId, userPw,userPhone, userBirthYear, userBirthMonth, userBirthDate, userStatus, userEmail)
+
+      values
+      (#{userName},#{userId}, hex(aes_encrypt(#{userPw}, 'abc')), #{userPhone},#{userBirthYear},#{userBirthMonth},#{userBirthDate},#{userStatus},#{userEmail})
+   </insert>
+   
+   <!-- 로그인 -->
+   <select id="login" parameterType="map" resultType="_int">
+      select userNum from tbl_user where userId=#{userId} and userPw =hex(aes_encrypt(#{userPw}, 'abc'))
+   </select>
+   
+   <!-- userStatus -->
+   <select id="selectStatus" parameterType="_int" resultType="_int">
+      select userStatus from tbl_user where userNum=#{userNum}
+   </select>
+   
+   <!-- userName -->
+   <select id="selectName" parameterType="_int" resultType="string">
+      select userName from tbl_user where userNum=#{userNum}
+   </select>
+
+	<!-- user정보 조회 -->
+
+	<select id="getInfo" parameterType="_int" resultType="userVO">
+	 select userNum, userName, userId, userPw, userPhone, userBirthYear, userBirthMonth, userBirthDate, userStatus, userEmail
+	 from tbl_user
+	 where userNum= #{userNum}
+	
+	</select>
+
+
+
+
+
+
+
+
+
+   
+</mapper>

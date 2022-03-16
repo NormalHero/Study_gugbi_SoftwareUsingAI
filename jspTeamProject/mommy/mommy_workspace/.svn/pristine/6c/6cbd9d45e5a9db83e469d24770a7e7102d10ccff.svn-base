@@ -1,0 +1,72 @@
+
+         @media (max-width: 390px){
+	
+		.button-position-1 {
+		position: relative;
+		top: 100px;
+	}
+	
+	.p-position-1 {
+	    position: relative !important;
+    	top: 76px !important;
+    	left: 12px !important;
+    	color: #93999a !important;
+    	
+	}
+	
+	input[type="text"] {
+	    position: relative !important;
+    	top: 87px !important;
+    	left: 0px !important;
+    	border: 2px solid #e2eaec !important;
+    	width: 89% !important;
+    	border-radius: 1px !important;
+    	height: 53px !important;
+	}
+	
+	.p-position-1 {
+	    position: relative;
+    	top: 76px;
+    	color: #93999a;
+	}
+	
+	.input-position-2 {
+	    width: 89% !important;
+    	position: relative !important;
+    	left: 18px !important;
+    	border-radius: 1px !important;
+    	border: 1px solid #e2eaec !important;
+	}
+
+	}
+	
+	/* 미디어쿼리 */
+	
+	.button-position-1 {
+		position: relative;
+		top: 100px;
+	}
+	
+	input[type="text"] {
+	    position: relative ;
+   		top: 87px ;
+    	left: 2px ;
+    	border: 2px solid #e2eaec ;
+    	width: 38% ;
+    	border-radius: 1px ;
+    	height: 57px ;
+	}
+	
+	.p-position-1 {
+	    position: relative;
+    	top: 76px;
+    	color: #93999a;
+	}
+	
+	.input-position-2 {
+		width: 38%;
+    	position: relative;
+    	left: 2px;
+    	border-radius: 1px !important;
+		border: 1px solid #e2eaec !important;
+	}
