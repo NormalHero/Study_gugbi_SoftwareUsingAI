@@ -6,10 +6,11 @@
       <typeAlias type="com.mommy.app.user.vo.UserVO" alias="UserVO"/>
       <typeAlias type="com.mommy.app.ask.vo.AskVO" alias="askVO"/>
       <typeAlias type="com.mommy.app.ask.vo.AskDTO" alias="askDTO"/>
-      <!-- 
-      <typeAlias type="com.mommy.app.community.vo.communityCommentVO" alias="communityCommentVO"/>
-      <typeAlias type="com.mommy.app.community.vo.communityCommentDTO" alias="communityCommentDTO"/>
-       -->
+       
+      <typeAlias type="com.mommy.app.community.vo.CommunityCommentVO" alias="communityCommentVO"/>
+      <typeAlias type="com.mommy.app.community.vo.CommunityCommentDTO" alias="communityCommentDTO"/>
+      
+      <typeAlias type="com.mommy.app.admin.vo.AdminFilesVO" alias="AdminFilesVO"/>
       <typeAlias type="com.mommy.app.ask.vo.AskFilesVO" alias="AskFilesVO"/>
       <typeAlias type="com.mommy.app.community.vo.FilesVO" alias="FilesVO"/>
       <typeAlias type="com.mommy.app.community.vo.CommunityVO" alias="communityVO"/>
@@ -17,10 +18,20 @@
       <!-- 
       <typeAlias type="com.mommy.app.myPage.vo.myPageVO" alias="myPageVO"/>
       <typeAlias type="com.mommy.app.myPage.vo.myPageDTO" alias="myPageDTO"/>
-       -->
+      
+       <typeAlias type="com.mommy.app.service.vo.FavoriteVO" alias="FavoriteVO"/>
+       <typeAlias type="com.mommy.app.service.vo.FavoriteDTO" alias="FavoriteDTO"/>
+      --> 
        <typeAlias type="com.mommy.app.notice.vo.NoticeVO" alias="NoticeVO"/>
        <typeAlias type="com.mommy.app.service.vo.ServiceVO" alias="ServiceVO"/>
-       
+       <typeAlias type="com.mommy.app.service.vo.ServiceDTO" alias="ServiceDTO"/>
+       <typeAlias type="com.mommy.app.service.vo.LookProfileDTO" alias="LookProfileDTO"/>
+       <typeAlias type="com.mommy.app.admin.vo.AdminQnaVO" alias="AdminQnaVO"/>
+       <typeAlias type="com.mommy.app.admin.vo.AdminQnaDTO" alias="AdminQnaDTO"/>
+       <typeAlias type="com.mommy.app.admin.vo.AdminNoticeVO" alias="AdminNoticeVO"/>
+       <typeAlias type="com.mommy.app.admin.vo.AdminAuthVO" alias="AdminAuthVO"/>
+       <typeAlias type="com.mommy.app.admin.vo.AdminAuthDTO" alias="AdminAuthDTO"/>
+
    </typeAliases>
 
    <environments default="development">
@@ -43,7 +54,12 @@
       <mapper resource="com/mommy/mybatis/mapper/files.xml"/>
       <mapper resource="com/mommy/mybatis/mapper/notice.xml"/>
       <mapper resource="com/mommy/mybatis/mapper/service.xml"/>
-      <!--  <mapper resource="com/mommy/mybatis/mapper/myPage.xml"/> -->
+      <mapper resource="com/mommy/mybatis/mapper/myPage.xml"/>
+      <!--  <mapper resource="com/mommy/mybatis/mapper/myPage.xml"/>
+      <mapper resource="com/mommy/mybatis/mapper/favorite.xml"/> -->
+      
+      <mapper resource="com/mommy/mybatis/mapper/admin.xml"/>
+      <mapper resource="com/mommy/mybatis/mapper/adminFiles.xml"/>
    </mappers>
    
 </configuration>
