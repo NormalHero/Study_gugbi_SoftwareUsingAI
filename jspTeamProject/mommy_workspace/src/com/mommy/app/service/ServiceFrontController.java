@@ -41,8 +41,8 @@ public class ServiceFrontController extends HttpServlet{
 			
 		}else if(command.equals("/service/FavoriteDeleteOk.ser")) {
 			new FavoriteDeleteOk().execute(req, resp);
-
 		}
+		
 		else if(command.equals("/service/WriteMom.ser")) {
 			af = new WriteMom().execute(req, resp);
 		}else if(command.equals("/service/WriteMomOk.ser")) {
@@ -59,11 +59,14 @@ public class ServiceFrontController extends HttpServlet{
 			af = new LookSitterProfileOk().execute(req, resp);
 		}
 		
-		
 		else if(command.equals("/service/WriteSitter.ser")) {
 			af = new WriteSitter().execute(req, resp);
 		}else if(command.equals("/service/WriteSitterOk.ser")) {
 			af = new WriteSitterOk().execute(req, resp);
+		}else if(command.equals("/service/SitterProfileDeleteOk.ser")) {
+			af = new SitterProfileDeleteOk().execute(req, resp);
+		}else if(command.equals("/service/LookMomProfileOk.ser")) {
+			af = new LookMomProfileOk().execute(req, resp);
 		}
 		
 		
