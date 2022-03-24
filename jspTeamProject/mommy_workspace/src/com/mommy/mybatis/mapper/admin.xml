@@ -10,6 +10,10 @@
 		order by 1 desc limit #{startRow}, #{rowCount}
 	</select>
 	
+	
+		
+	
+	
 		<!--신고 게시글 목록 -->
 	<select id="reportSelectAll" parameterType="map" resultType="AdminQnaDTO">
 		select askNum, a.userNum, categoryNum, askTitle, askContent,
@@ -111,13 +115,36 @@
 	<!-- 인증 게시글 총 갯수 -->
 	<select id="authGetTotal" resultType="_int">
 		select count(profileNum) from tbl_profile
+	
+	</select>
+	
+	<!-- 인증 대기 총 갯수 -->
+	<select id="authGetTotal0" resultType="_int">
+		select count(profileProcess= 0) from tbl_profile
+	
+	</select>
+	
+		<!-- 인증 완료 총 갯수 -->
+	<select id="authGetTotal1" resultType="_int">
+		select count(profileProcess= 1) from tbl_profile
+	
 	</select>
 	<!-- 인증 업데이트 -->
 	<update id="update_Certification" parameterType="AdminAuthDTO">
 		update tbl_profile
 		  set checkMedi = #{checkMedi} , checkMom = #{checkMom}, checkTeacher = #{checkTeacher} 
-		  ,checkCitizen = #{checkCitizen}, checkUniversity = #{checkUniversity}
+		  ,checkCitizen = #{checkCitizen}, checkUniversity = #{checkUniversity}, profileProcess= 1
 		   where profileNum= #{profileNum}
 	</update>
+	
+	
+	<!-- DTO 첨부파일 추가 -->
+	<select id="getFileNames" resultType="_int" parameterType="ProfileFilesVO">
+		select fileName,fileNameOriginal  from tbl_profileFiles where profileNum = ${profileNum};
+	
+	</select>
+	
+	
+	
 	
 	</mapper>

@@ -9,6 +9,9 @@
 		values(#{fileName}, #{profileNum}, #{fileNameOriginal})
 	</insert>
 	
-
+	<!-- 첨부파일 삭제 -->
+	<delete id="delete" parameterType="ProfileFilesVO">
+		delete from tbl_profileFiles where profileNum=#{profileNum}
+	</delete>
 </mapper>
 

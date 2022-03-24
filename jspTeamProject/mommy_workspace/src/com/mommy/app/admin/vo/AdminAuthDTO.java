@@ -13,7 +13,37 @@ public class AdminAuthDTO {
 	private int checkTeacher;
 	private int checkCitizen;
 	private int checkUniversity;
+	private int profileProcess;
 	
+	private String fileName ;
+	private String fileNameOriginal ;
+
+
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileNameOriginal() {
+		return fileNameOriginal;
+	}
+
+	public void setFileNameOriginal(String fileNameOriginal) {
+		this.fileNameOriginal = fileNameOriginal;
+	}
+
+	public void setProfileNum(int profileNum) {
+		this.profileNum = profileNum;
+	}
+
+	public void setProfileAttach(String profileAttach) {
+		this.profileAttach = profileAttach;
+	}
+
 	public AdminAuthDTO() {;}
 	
 	public AdminAuthDTO(AdminAuthVO AdminAuthVO) {
@@ -27,6 +57,8 @@ public class AdminAuthDTO {
 		this.checkTeacher = AdminAuthVO.getCheckTeacher();
 		this.checkCitizen = AdminAuthVO.getCheckCitizen();
 		this.checkUniversity = AdminAuthVO.getCheckUniversity();
+		this.profileProcess = AdminAuthVO.getProfileProcess();
+		
 	}
 
 	public int getProfileNum() {
@@ -115,8 +147,15 @@ public class AdminAuthDTO {
 
 	public void setCheckUniversity(int checkUniversity) {
 		this.checkUniversity = checkUniversity;
+								
 	}
 	
-	
+	public int getProfileProcess() {
+		return profileProcess;
+	}
+
+	public void setProfileProcess(int profileProcess) {
+		this.profileProcess = profileProcess;
+	}
 	
 }

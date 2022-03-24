@@ -12,6 +12,7 @@ import com.mommy.app.admin.vo.AdminQnaDTO;
 import com.mommy.app.admin.vo.AdminQnaVO;
 import com.mommy.app.admin.vo.AdminVO;
 import com.mommy.app.notice.vo.NoticeVO;
+import com.mommy.app.service.vo.ProfileFilesVO;
 import com.mommy.app.user.vo.UserVO;
 import com.mommy.mybatis.config.MyBatisConfig;
 
@@ -122,10 +123,32 @@ public class AdminDAO
 	
 //---------------------------------------------------------------------------
 	//체크 박스 업데이트
-	public int CheckBox_Update( AdminAuthDTO profileNum) {
-		return sqlSession.selectOne("Admin.update_Certification",profileNum);
+
+	public void CheckBox_Update( AdminAuthDTO DTO ) {
+		System.out.println(DTO.getCheckCitizen());
+		System.out.println(DTO.getCheckMedi());
+		System.out.println(DTO.getCheckMom());
+		System.out.println(DTO.getCheckTeacher());
+		System.out.println(DTO.getCheckUniversity());
+		System.out.println(DTO.getProfileNum());
+
+		 sqlSession.update("Admin.update_Certification",DTO);
+
 	}
 	
+	//인증 대기 수 
+	public int authGetTotal0() {
+		return sqlSession.selectOne("Admin.authGetTotal0");
+	}	
+	
+	//인증 완료 수
+	public int authGetTotal1() {
+		return sqlSession.selectOne("Admin.authGetTotal1");
+	}	
+	//DTO 파일 추가 
+	public ProfileFilesVO getFileNames(int profileNum) {
+		return sqlSession.selectOne("Admin.getFileNames",profileNum);
+	}
 	
 }
 
