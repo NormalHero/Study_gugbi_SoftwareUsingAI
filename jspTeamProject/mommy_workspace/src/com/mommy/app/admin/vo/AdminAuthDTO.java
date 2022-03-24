@@ -15,34 +15,7 @@ public class AdminAuthDTO {
 	private int checkUniversity;
 	private int profileProcess;
 	
-	private String fileName ;
-	private String fileNameOriginal ;
-
-
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFileNameOriginal() {
-		return fileNameOriginal;
-	}
-
-	public void setFileNameOriginal(String fileNameOriginal) {
-		this.fileNameOriginal = fileNameOriginal;
-	}
-
-	public void setProfileNum(int profileNum) {
-		this.profileNum = profileNum;
-	}
-
-	public void setProfileAttach(String profileAttach) {
-		this.profileAttach = profileAttach;
-	}
+	
 
 	public AdminAuthDTO() {;}
 	

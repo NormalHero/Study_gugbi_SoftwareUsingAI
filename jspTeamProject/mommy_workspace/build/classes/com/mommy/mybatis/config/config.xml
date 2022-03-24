@@ -33,6 +33,7 @@
        <typeAlias type="com.mommy.app.admin.vo.AdminAuthDTO" alias="AdminAuthDTO"/>
       
        <typeAlias type="com.mommy.app.service.vo.ProfileFilesVO" alias="ProfileFilesVO"/>
+       <typeAlias type="com.mommy.app.chat.vo.ChatVO" alias="ChatVO"/>
 	
    </typeAliases>
 
@@ -59,10 +60,11 @@
       <mapper resource="com/mommy/mybatis/mapper/myPage.xml"/>
       <!--  <mapper resource="com/mommy/mybatis/mapper/myPage.xml"/>-->
       <mapper resource="com/mommy/mybatis/mapper/favorite.xml"/>  
-      
       <mapper resource="com/mommy/mybatis/mapper/admin.xml"/>
       <mapper resource="com/mommy/mybatis/mapper/adminFiles.xml"/>
       <mapper resource="com/mommy/mybatis/mapper/profileFiles.xml"/>
+      
+      <mapper resource="com/mommy/mybatis/mapper/chat.xml"/>
    </mappers>
    
 </configuration>

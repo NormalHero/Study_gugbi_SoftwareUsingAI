@@ -83,6 +83,7 @@
 								
 								
 								
+								
 								<tr class="wrap">
 									<td class="test"><img id="qwe"
 										src="https://cdn.discordapp.com/attachments/954273372760571914/955482467148656700/v2.png"
@@ -93,7 +94,7 @@
 									<!-- 첨부파일 목록 -->
 	                           		<td>
 		                           		<a href="${pageContext.request.contextPath}">
-		                           			<c:out value="${auth.getFileNameOriginal()}"/>
+		                           			<c:out value="${auth.getProfileAttach()}"/>
 		                           		</a>
 		                           	</td>
 		                           	<td>${auth.getProfileDate()}</td>

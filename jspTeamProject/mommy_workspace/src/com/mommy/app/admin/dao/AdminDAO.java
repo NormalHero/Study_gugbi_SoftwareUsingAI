@@ -12,7 +12,6 @@ import com.mommy.app.admin.vo.AdminQnaDTO;
 import com.mommy.app.admin.vo.AdminQnaVO;
 import com.mommy.app.admin.vo.AdminVO;
 import com.mommy.app.notice.vo.NoticeVO;
-import com.mommy.app.service.vo.ProfileFilesVO;
 import com.mommy.app.user.vo.UserVO;
 import com.mommy.mybatis.config.MyBatisConfig;
 
@@ -145,10 +144,6 @@ public class AdminDAO
 	public int authGetTotal1() {
 		return sqlSession.selectOne("Admin.authGetTotal1");
 	}	
-	//DTO 파일 추가 
-	public ProfileFilesVO getFileNames(int profileNum) {
-		return sqlSession.selectOne("Admin.getFileNames",profileNum);
-	}
 	
 }
 

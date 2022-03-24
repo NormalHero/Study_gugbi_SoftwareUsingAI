@@ -137,14 +137,4 @@
 		   where profileNum= #{profileNum}
 	</update>
 	
-	
-	<!-- DTO 첨부파일 추가 -->
-	<select id="getFileNames" resultType="_int" parameterType="ProfileFilesVO">
-		select fileName,fileNameOriginal  from tbl_profileFiles where profileNum = ${profileNum};
-	
-	</select>
-	
-	
-	
-	
 	</mapper>

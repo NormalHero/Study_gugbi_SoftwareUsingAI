@@ -2,7 +2,6 @@ package com.mommy.app.admin;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +11,6 @@ import com.mommy.action.ActionForward;
 import com.mommy.app.admin.dao.AdminDAO;
 import com.mommy.app.admin.vo.AdminAuthDTO;
 import com.mommy.app.service.dao.ProfileFilesDAO;
-import com.mommy.app.service.vo.ProfileFilesVO;
 import com.mommy.app.user.dao.UserDAO;
 
 public class AdminAuthListOk {
@@ -57,21 +55,9 @@ public class AdminAuthListOk {
 //		req.setAttribute("userId", userId);
 //		req.setAttribute("userName", userName);
 //		req.setAttribute("userStatus", userStatus);
-		List<AdminAuthDTO> authList =dao.authSelectAll(authMap);
-		for (int i = 0; i < authList.size(); i++) {
-			ProfileFilesVO pfVo = new ProfileFilesVO();
-			
-			 pfVo = dao.getFileNames(authList.get(i).getProfileNum());
-			 System.out.println(authList.get(i).getProfileNum());
-			 System.out.println(pfVo.getFileName());
-			 System.out.println(pfVo.getFileNameOriginal());
-			 authList.get(i).setFileName(pfVo.getFileName());
-			 authList.get(i).setFileNameOriginal(pfVo.getFileNameOriginal());
-		}
+
 		
-		
-		
-		req.setAttribute("authList", authList);
+		req.setAttribute("authList", dao.authSelectAll(authMap));
 		req.setAttribute("page", page);
 		req.setAttribute("page", page);
 		req.setAttribute("startPage", startPage);
