@@ -99,7 +99,8 @@ public class ExampleController {
     //   사용자가 전달한 점수의 총점과 평균 점수 출력
 
     @GetMapping("/ex08")
-    public void ex08(@ModelAttribute("taskVO") TaskVO taskVO, Model model){
+    public void ex08(TaskVO taskVO/*, Model model*/){
+/*
     int kor =     taskVO.getKor();
     int math =     taskVO.getMath();
     int eng =     taskVO.getEng();
@@ -108,13 +109,16 @@ public class ExampleController {
     double avg = sum / 3;
         model.addAttribute("sum", sum);
         model.addAttribute("avg", avg);
+*/
 
     log.info("==========================");
+    log.info(taskVO.toString());
+/*
     log.info("taskVO : "+kor);
-    log.info("영어점수 : "+taskVO.getEng() );
+    log.info("영어점수 : "+eng );
     log.info("수학점수 : "+math );
     log.info("국어점수 : "+eng );
-
+*/
     log.info("==========================");
 
     }
