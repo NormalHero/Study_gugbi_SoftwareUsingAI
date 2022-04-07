@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EX07</title>
+</head>
+<body>
+<h1>EX07</h1>
+<table border="1">
+    <tr>
+        <th>이름</th>
+        <th>나이</th>
+        <th>성별</th>
+        <th>몸무게</th>
+    </tr>
+    <!-- 부모 요소애 th:object를 설절한 뒤 자식 요소에서 *{}로 필드를 접근할 수 있다. -->
+    <!--나이 뒤에 "살" 붙이고, 무게 뒤에 "kg" 붙이기  힌트 ("| |")  -->
+    <tr th:object="${exampleVO}">
+        <!--게터는 생략가능-->
+        <td th:text="*{name}"></td>
+        <td th:text="|*{age}살|"></td>
+        <td th:text="${gender}"></td>
+        <td th:text="|${weight}kg|"></td>
+
+        <!--        타임리프 오브젝트 사용하지 않을 때 -->
+        <!--        <td th:text="${exampleVO.name()}"></td>-->
+        <!--        <td th:text="${exampleVO.age()}"></td>-->
+        <!--
+        <td th:text="${exampleVO.getName()}"></td>
+        <td th:text="${exampleVO.getAge()}"></td>
+        -->
+    </tr>
+</table>
+</body>
+</html>
