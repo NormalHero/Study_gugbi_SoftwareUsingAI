@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>보드 연습(예습)</title>
+</head>
+<body>
+    <h1>게시글 목록</h1>
+    <div>
+      <div th:each="board : ${boardList}">
+          <div style="margin-bottom: 50px; border: 1px solid fuchsia;">
+              <div>
+                  게시글 번호: <span th:text="${board.bno}"/>
+              </div>
+              <div>
+                  게시글 제목: <span th:text="${board.title}"/>
+              </div>
+              <div>
+                게시글 내용: <span th:text="${board.content}"/>
+            </div>
+            <div>
+                작성자: <span th:text="${board.writer}"/>
+            </div>
+            <div>
+                작성시간: <span th:text="${board.regdate}"/>
+            </div>
+            <div>
+                수정시간: <span th:text="${board.updateDate}"/>
+            </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
