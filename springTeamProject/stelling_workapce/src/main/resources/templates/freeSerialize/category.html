@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Strlling</title>
+<!--    <link href="/css/freeSerializeCss/catrgoryCss.css" rel="stylesheet" type="text/css">-->
+    <style>
+        /* 바디의 길이,넓이 설정 */
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 공통 값*/
+        /* 최대크기 설정*/
+        .giveMaxWidth{
+            max-width:1200px ;
+            margin:0 auto  ;
+        }
+
+
+
+        div#categoryWrap{
+            width: 100%;
+            height: 100%;
+
+        }
+
+
+        section#categorySection{width : 100%;}
+
+        /* 카테고리메뉴 테이블*/
+        div#categoryMenu{
+            width : 100%;
+        }
+        div#categoryMenu table{
+            width : 100%;
+        }
+
+
+        #categoryMenu table tbody{
+            display: flex;
+            width : 100%;
+        }
+        #categoryMenu table tbody tr{
+            display: flex;
+            width: 100%;
+            height: 60px;
+            justify-content: center;
+            align-items: center;
+        }
+        #categoryMenu table tbody tr td {
+            width: 100%;
+            height: 100%;
+        }
+        #categoryMenu table tbody tr td a{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            border: 1px #ff8b77 solid;
+            text-align: center;
+            /* vertical-align: middle; */
+            align-items: center;
+            justify-content: center;
+            text-decoration-line:none;
+
+        }
+        #categoryMenu table tbody tr td a:visited{color: black}
+        #categoryMenu table tbody tr td a:link{color: black}
+    </style>
+</head>
+<body>
+    <div id="categoryWrap" class="giveMaxWidth">
+        <section id="categorySection" class="giveMaxWidth">
+            <div id="categoryMenu" class="giveMaxWidth">
+                <table class="giveMaxWidth">
+                    <tbody>
+                        <tr>
+                            <td><a href="#" class="categoryMenuItem">전체</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" class="categoryMenuItem">신작</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" class="categoryMenuItem">완결</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    let $categoryMenuItem = $('.categoryMenuItem')
+    $('.categoryMenuItem').on('click',function () {
+        categoryMenuReset()
+       $(this).css('border','3px solid #ff8b77')
+       $(this).css('border-bottom','none')
+        console.log($categoryMenuItem)
+        if($(this).text() == '전체'){
+            $($categoryMenuItem[1]).css('border-bottom','3px solid #ff8b77')
+            $($categoryMenuItem[2]).css('border-bottom','3px solid #ff8b77')
+        }else if($(this).text() == '신작'){
+            $($categoryMenuItem[0]).css('border-bottom','3px solid #ff8b77')
+            $($categoryMenuItem[2]).css('border-bottom','3px solid #ff8b77')
+        }else if($(this).text() == '완결'){
+            $($categoryMenuItem[0]).css('border-bottom','3px solid #ff8b77')
+            $($categoryMenuItem[1]).css('border-bottom','3px solid #ff8b77')
+        }
+
+    })
+    function categoryMenuReset() {
+        $.each($categoryMenuItem, function (index, item) {
+            $(item).css('border','1px solid  #ff8b77 ')
+        });
+    }
+</script>
+</html>
