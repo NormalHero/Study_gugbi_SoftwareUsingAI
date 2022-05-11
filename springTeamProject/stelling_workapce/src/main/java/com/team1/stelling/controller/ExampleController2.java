@@ -28,17 +28,22 @@ public class ExampleController2 {
     @GetMapping("/editProfile")
     public String editProfile(){
         log.info("editProfile");
-        return "myPage_editProfile";
+        return "mypage/myPageEditProfile";
+    }
+    @GetMapping("/myPageQuestion")
+    public String myPageQuestion(){
+        log.info("myPageQuestion");
+        return "mypage/myPageQuestion";
     }
 
-    @GetMapping("/detailInquiry")
+    @GetMapping("/inquiryDetail")
     public String detailInquiry(){
-        return "inquiry_detail";
+        return "inquiry/inquiryDetail";
     }
 
-    @GetMapping("/writeInquiry")
+    @GetMapping("/inquiryWrite")
     public String writeInquiry(){
-        return "inquiry_write";
+        return "inquiry/inquiryWrite";
     }
 
     @GetMapping("/ranking")
