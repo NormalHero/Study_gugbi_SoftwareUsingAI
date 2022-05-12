@@ -1,5 +1,6 @@
 package com.team1.stelling.domain.vo;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -44,6 +45,7 @@ public class SubNovelVO {
     @Column(name = "SUBNOVEL_STATUS ")
     private  int subNovelStatus;/*회차 상태 0 숨김, 1 보여짐*/
 
+    @Builder
     public SubNovelVO(Long subNovelNumber, NovelVO novelVO, UserVO userVO, String subNovelTitle, String subNovelWriterComment, Date subNovelUploadDate, Date subNovelUpdateDate, int subNovelViewCount, int subNovelLickCount, int subNovelStatus) {
         this.subNovelNumber = subNovelNumber;
         this.novelVO = novelVO;

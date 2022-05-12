@@ -4,6 +4,7 @@ package com.team1.stelling.domain.vo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name ="TBL_USER")
 @SequenceGenerator(name = "USER_SEQ" , allocationSize = 1)
 @Getter
+@ToString
 @NoArgsConstructor
 public class UserVO {
     @Id
