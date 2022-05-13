@@ -1,19 +1,22 @@
 package com.team1.stelling.domain.vo;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
+@Component
 @Entity
 @Table(name ="TBL_USER")
 @SequenceGenerator(name = "USER_SEQ" , allocationSize = 1)
 @Getter
+@Setter
 @ToString
-@NoArgsConstructor
+@DynamicInsert
+@Builder
+@AllArgsConstructor
 public class UserVO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
@@ -28,7 +31,7 @@ public class UserVO {
     @Column(name = "USER_EMAIL")
     private String userEmail;   // 이메일
     @Column(name = "USER_GENDER")
-    private String userGender;  // 성별
+    private int userGender;  // 성별
     @Column(name = "USER_PHONENUM")
     private String userPhoneNum;  //전화번호
     @Column(name = "USER_STATUS")
@@ -38,17 +41,15 @@ public class UserVO {
     @Column(name = "USER_ACCESSTOKEN")
     private String userAccessToken; // 카카오 계정 이용시 발급 받는 토큰
 
-    @Builder
-    public UserVO(Long userNumber, String userId, String userPw, String userNickName, String userEmail, String userGender, String userPhoneNum, int userStatus, int userCoinBalance, String userAccessToken) {
-        this.userNumber = userNumber;
-        this.userId = userId;
-        this.userPw = userPw;
-        this.userNickName = userNickName;
-        this.userEmail = userEmail;
-        this.userGender = userGender;
-        this.userPhoneNum = userPhoneNum;
-        this.userStatus = userStatus;
-        this.userCoinBalance = userCoinBalance;
-        this.userAccessToken = userAccessToken;
-    }
+    public void updateUserPw(String userPw) { this.userPw = userPw; }
+    public void updateUserNickName(String userNickName) { this.userNickName = userNickName; }
+    public void updateUserEmail(String userEmail) { this.userEmail = userEmail; }
+    public void updateUserGender(int userGender) { this.userGender = userGender; }
+    public void updateUserPhoneNum(String userPhoneNum) { this.userPhoneNum = userPhoneNum; }
+    public void updateUserStatus(int userStatus) { this.userStatus = userStatus; }
+    public void updateUserCoinBalance(int userCoinBalance) { this.userCoinBalance = userCoinBalance; }
+    public void updateUserAccessToken(String userAccessToken) { this.userAccessToken = userAccessToken; }
+
+    public UserVO() {;}
+
 }

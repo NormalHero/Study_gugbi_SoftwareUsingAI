@@ -1,27 +1,28 @@
 package com.team1.stelling.domain.vo;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.*;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.Generated;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Component
 @Entity
 @Table(name ="TBL_ILLUST")
 @SequenceGenerator(name ="ILLUST_SEQ" , allocationSize = 1)
 @Getter
+@Setter
 @ToString(of = {"illustNumber","illustTitle","illustContent","illustUploadDate","illustUpdateDate","illustHashTag","illustViewCount","illustLike","illustShortIntro"})
-@NoArgsConstructor
+@AllArgsConstructor
 public class IllustVO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ILLUST_SEQ")
-    @Value("ILLUST_NUMBER")
+    @Column(name = "ILLUST_NUMBER")
     private Long illustNumber;
 
     @ManyToOne
@@ -32,8 +33,12 @@ public class IllustVO {
     private String illustTitle; // 일러스트 제목
     @Column(name = "ILLUST_CONTENT")
     private String illustContent;  // 일러스트 내용
-    @Column(name = "ILLUST_UPLOADDATE")
+    @Generated(GenerationTime.INSERT)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "ILLUST_UPLOADDATE" ,updatable = false)
     private Date illustUploadDate;   /* 작성 시간*/
+    @Generated(GenerationTime.INSERT)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ILLUST_UPDATEDATE")
     private Date illustUpdateDate; // 수정시간
     @Column(name = "ILLUST_HASHTAG")
@@ -45,6 +50,21 @@ public class IllustVO {
     @Column(name = "ILLUST_SHORTINTRO")
     private String illustShortIntro;/*작품에 대한 짧은 소개*/
 
+    public void updateIllustTitle(String illustTitle) { this.illustTitle = illustTitle; }
+
+    public void updateIllustContent(String illustContent) { this.illustContent = illustContent; }
+
+    public void updateIllustUpdateDate() { this.illustUpdateDate = new Date(); }
+
+    public void updateIllustHashTag(String illustHashTag) { this.illustHashTag = illustHashTag; }
+
+    public void updateIllustViewCount() { this.illustViewCount++; }// 조회수는 한개씩 증가한다
+
+    public void updateIllustLike() { this.illustLike++; } // 좋아요는 한개씩 증가한다
+
+    public void updateIllustShortIntro(String illustShortIntro) { this.illustShortIntro = illustShortIntro; }
+
+    public IllustVO() {;}
 
     @Builder
     public IllustVO(Long illustNumber, UserVO userVO, String illustTitle, String illustContent, String illustUploadDate, String illustUpdateDate, String illustHashTag, int illustViewCount, int illustLike, String illustShortIntro) {
@@ -59,9 +79,8 @@ public class IllustVO {
         this.illustLike = illustLike;
         this.illustShortIntro = illustShortIntro;
         try {
-            this.illustUploadDate = sdf.parse(illustUploadDate);
-            this.illustUpdateDate = sdf.parse(illustUpdateDate);
-
+            if(illustUploadDate != null) { this.illustUploadDate = sdf.parse(illustUploadDate); }
+            if(illustUpdateDate != null) { this.illustUpdateDate = sdf.parse(illustUpdateDate); }
         } catch (ParseException e) { e.printStackTrace();}
 
 

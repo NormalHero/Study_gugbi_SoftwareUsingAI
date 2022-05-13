@@ -1,23 +1,27 @@
 package com.team1.stelling.domain.vo;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Component
 @Entity
 @Table(name ="TBL_NOVEL")
 @SequenceGenerator(name = "NOVEL_SEQ" , allocationSize = 1)
 @Getter
+@Setter
 @ToString(of = {
-        "novelNumber","novelTitle","novelUserNick","novelHashtag","novelUploadDate", "novelUpdateDate", "novelMonday", "novelTuesDay",
+        "novelNumber","novelTitle","novelHashtag","novelUploadDate", "novelUpdateDate", "novelMonday", "novelTuesDay",
         "novelWednesDay", "novelThursDay", "novelFriDay", "novelSaturDay", "novelSunDay", "novelCategory", "novelStatus", "novelSerialsStatus",
-        "novelIntro"})
-@NoArgsConstructor
+        "novelIntro","novelFileName","novelUploadPath","novelUUID"})
+@AllArgsConstructor
 public class NovelVO {
 
     @Id
@@ -30,15 +34,16 @@ public class NovelVO {
    @ManyToOne
    @JoinColumn(name ="USER_NUMBER")
    private UserVO userVO;
-                     
    @Column(name = "NOVEL_TITLE")
    private String novelTitle;  // 소설제목
-   @Column(name = "USER_NICKNAME")
-   private String novelUserNick;   // 유저 닉네임
    @Column(name = "NOVEL_HASHTAG")
    private String novelHashtag; /*예) #로맨스 #메카물 #마법사*/
+    @Generated(GenerationTime.INSERT)
+    @Temporal(TemporalType.TIMESTAMP)
    @Column(name = "NOVEL_UPLOADDATE")
    private Date novelUploadDate; // 업로드(작성) 시간
+    @Generated(GenerationTime.INSERT)
+    @Temporal(TemporalType.TIMESTAMP)
    @Column(name = "NOVEL_UPDATEDATE")
    private Date novelUpdateDate; // 수정 시간
    @Column(name = "NOVEL_MONDAY")
@@ -63,16 +68,49 @@ public class NovelVO {
    private int novelSerialsStatus; /*정기연재 OR 자유연재 상태*/
    @Column(name = "NOVEL_INTRO")
    private String novelIntro; /* 소설 소개*/
+   @Column(name = "NOVEL_FILENAME")
+   private String novelFileName;
+   @Column(name = "NOVEL_UPLOADPATH")
+   private String novelUploadPath;
+   @Column(name = "NOVEL_UUID")
+   private String novelUUID;
+
+
+    public void updateNovelTitle(String novelTitle) { this.novelTitle = novelTitle;}
+    public void updateNovelHashtag(String novelHashtag) { this.novelHashtag = novelHashtag; }
+    public void updateNovelUpdateDate() { this.novelUpdateDate = new Date(); }
+    public void updateNovelMonday(int novelMonday) { this.novelMonday += novelMonday; } // 구현할떄 상황에 맞게 변경하거나 다른 메소드 사용
+    public void updateNovelTuesDay(int novelTuesDay) { this.novelTuesDay = novelTuesDay; }
+    public void updateNovelWednesDay(int novelWednesDay) { this.novelWednesDay = novelWednesDay; }
+    public void updateNovelThursDay(int novelThursDay) { this.novelThursDay = novelThursDay; }
+    public void updateNovelFriDay(int novelFriDay) { this.novelFriDay = novelFriDay; }
+    public void updateNovelSaturDay(int novelSaturDay) { this.novelSaturDay = novelSaturDay; }
+    public void updateNovelSunDay(int novelSunDay) { this.novelSunDay = novelSunDay; }
+    public void updateNovelCategory(String novelCategory) { this.novelCategory = novelCategory; }
+    public void updateNovelStatus(int novelStatus) { this.novelStatus = novelStatus; }
+    public void updateNovelSerialsStatus(int novelSerialsStatus) { this.novelSerialsStatus = novelSerialsStatus; }
+    public void updateNovelIntro(String novelIntro) { this.novelIntro = novelIntro; }
+
+    public void updateNovelFileName(String novelFileName) { this.novelFileName = novelFileName;}
+
+    public void updateNovelUploadPath(String novelUploadPath) { this.novelUploadPath = novelUploadPath; }
+
+    public void updateNovelUUID(String novelUUID) { this.novelUUID = novelUUID; }
+
+
+    public NovelVO() { ;}
 
     @Builder
-    public NovelVO(Long novelNumber, UserVO userVO, String novelTitle, String novelUserNick, String novelHashtag, Date novelUploadDate, Date novelUpdateDate, int novelMonday, int novelTuesDay, int novelWednesDay, int novelThursDay, int novelFriDay, int novelSaturDay, int novelSunDay, String novelCategory, int novelStatus, int novelSerialsStatus, String novelIntro) {
+    public NovelVO(Long novelNumber, UserVO userVO, String novelTitle, String novelHashtag, String novelUploadDate, String novelUpdateDate, int novelMonday, int novelTuesDay, int novelWednesDay, int novelThursDay, int novelFriDay, int novelSaturDay, int novelSunDay, String novelCategory, int novelStatus, int novelSerialsStatus, String novelIntro, String novelFileName, String novelUploadPath, String novelUUID) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.novelNumber = novelNumber;
         this.userVO = userVO;
         this.novelTitle = novelTitle;
-        this.novelUserNick = novelUserNick;
         this.novelHashtag = novelHashtag;
-        this.novelUploadDate = novelUploadDate;
-        this.novelUpdateDate = novelUpdateDate;
+        try {
+            if(novelUploadDate != null) { this.novelUploadDate = sdf.parse(novelUploadDate); }
+            if(novelUpdateDate != null) { this.novelUpdateDate = sdf.parse(novelUpdateDate); }
+        } catch (ParseException e) { e.printStackTrace(); }
         this.novelMonday = novelMonday;
         this.novelTuesDay = novelTuesDay;
         this.novelWednesDay = novelWednesDay;
@@ -84,5 +122,8 @@ public class NovelVO {
         this.novelStatus = novelStatus;
         this.novelSerialsStatus = novelSerialsStatus;
         this.novelIntro = novelIntro;
+        this.novelFileName = novelFileName;
+        this.novelUploadPath = novelUploadPath;
+        this.novelUUID = novelUUID;
     }
 }

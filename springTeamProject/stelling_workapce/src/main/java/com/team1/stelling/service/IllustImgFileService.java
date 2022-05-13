@@ -15,23 +15,13 @@ public class IllustImgFileService {
     private  final IllustImgFileRepository illustImgFileRepository;
 
 
-
     public List<IllustImgFileVO> getList(){
         return illustImgFileRepository.findAll();
     }
-    public void register(IllustImgFileVO vo){
-
+    public IllustImgFileVO get(Long illustImgFileBno){ return illustImgFileRepository.findById(illustImgFileBno).get();}
+    public void register(IllustImgFileVO vo){ illustImgFileRepository.save(vo);}
+    public void modify(IllustImgFileVO vo){
+        vo.updateIllustImgFileUpdateDate();
         illustImgFileRepository.save(vo);
-/*        illustImgFileRepository.save(IllustImgFileVO.builder()
-                .illustImgFileFileName(vo.getIllustImgFileFileName())
-                .illustImgFileFilePath(vo.getIllustImgFileFilePath())
-                .illustImgFileOriginFileName(vo.getIllustImgFileOriginFileName())
-                .illustImgFileUpdateDate(vo.getIllustImgFileUpdateDate()+"")
-                .illustImgFileUploadDate(vo.getIllustImgFileUpdateDate()+"")
-                .userVO(vo.getUserVO())
-                .illustVO(vo.getIllustVO())
-                .build()
-                );*/
-
     }
 }
