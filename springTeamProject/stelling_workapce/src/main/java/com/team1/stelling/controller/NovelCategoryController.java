@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Calendar;
+import java.util.Date;
+
 @Controller
 @Slf4j
 @RequestMapping("/novel/category/*")
@@ -32,15 +35,17 @@ public class NovelCategoryController {
     @GetMapping("/novelCategory")
     public String novelCategory(@RequestParam(defaultValue="0") int categoryStatus, Model model, @PageableDefault(page = 0, size = 10, sort = "novelNumber" ,direction = Sort.Direction.DESC)Pageable pageable){
         Page<NovelCategoryDTO> list = null;
-       if(categoryStatus == 0) {
-           // 전체
-          list = novelService.getList(pageable);
-
-       }else if(categoryStatus == 1){
-           // 신작
+       if(categoryStatus == 1){
+       // 신작
+           Calendar cal = Calendar.getInstance();
+           Date now = new Date();
+           cal.setTime(now);
+           cal.add(Calendar.DATE, -7);
+           Date targetPast = cal.getTime();
+           list = novelService.getNewNovelList(targetPast,now,pageable);
        }else if (categoryStatus == 2){
            list =   novelService.getEndNovelList(pageable);
-       }
+       }else{ list = novelService.getList(pageable);}
 
         PageableDTO pageableDTO = new PageableDTO((int) list.getTotalElements(), pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
@@ -57,7 +62,18 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelCategory/viewCount")
     public String novelCategoryViewCount(@RequestParam(defaultValue="0") int categoryStatus, Model model, @PageableDefault(page = 0, size = 10, sort = "novelViewCountTotal" ,direction = Sort.Direction.DESC)Pageable pageable){
-        Page<NovelCategoryDTO> list = novelService.getList(pageable);
+        Page<NovelCategoryDTO> list = null;
+        if(categoryStatus == 1){
+            // 신작
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            list = novelService.getNewNovelList(targetPast,now,pageable);
+        }else if (categoryStatus == 2){
+            list =   novelService.getEndNovelList(pageable);
+        }else{ list = novelService.getList(pageable);}
         PageableDTO pageableDTO = new PageableDTO( (int)list.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
         model.addAttribute( "list",list);
@@ -70,7 +86,18 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelCategory/likeCount")
     public String novelCategoryLikeCount(@RequestParam(defaultValue="0") int categoryStatus, Model model, @PageableDefault(page = 0, size = 10, sort = "novelLikeCountTotal" ,direction = Sort.Direction.DESC)Pageable pageable){
-        Page<NovelCategoryDTO> list = novelService.getList(pageable);
+        Page<NovelCategoryDTO> list = null;
+        if(categoryStatus == 1){
+            // 신작
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            list = novelService.getNewNovelList(targetPast,now,pageable);
+        }else if (categoryStatus == 2){
+            list =   novelService.getEndNovelList(pageable);
+        }else{ list = novelService.getList(pageable);}
         PageableDTO pageableDTO = new PageableDTO( (int)list.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
         model.addAttribute( "list",list);
@@ -84,8 +111,19 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelSearch")
     public String novelSearch (@RequestParam(defaultValue="0") int categoryStatus, String keyword, Model model, @PageableDefault(page = 0, size = 10, sort = "novelNumber" ,direction = Sort.Direction.DESC) Pageable pageable){
-        log.info("#############keyword:"+keyword);
-        Page<NovelCategoryDTO> searchList = novelService.search(keyword, pageable);
+        Page<NovelCategoryDTO> searchList = null;
+        if(categoryStatus == 1){
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            searchList = novelService.getNewNovelListSearch(targetPast,now,keyword,pageable);
+        }else if(categoryStatus == 2){
+            searchList = novelService.getEndNovelListSearch(keyword,pageable);
+        }else{
+            searchList = novelService.search(keyword, pageable);
+        }
 //        Page<NovelCategoryDTO> searchList = novelSearchService.search(keyword, pageable);
         PageableDTO pageableDTO = new PageableDTO( (int)searchList.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
@@ -101,8 +139,19 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelSearch/viewCount")
     public String novelSearchViewCount (@RequestParam(defaultValue="0") int categoryStatus, String keyword, Model model, @PageableDefault(page = 0, size = 10, sort = "novelViewCountTotal" ,direction = Sort.Direction.DESC) Pageable pageable){
-        log.info("#############keyword:"+keyword);
-        Page<NovelCategoryDTO> searchList = novelService.search(keyword, pageable);
+        Page<NovelCategoryDTO> searchList = null;
+        if(categoryStatus == 1){
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            searchList = novelService.getNewNovelListSearch(targetPast,now,keyword,pageable);
+        }else if(categoryStatus == 2){
+            searchList = novelService.getEndNovelListSearch(keyword,pageable);
+        }else{
+            searchList = novelService.search(keyword, pageable);
+        }
 //        Page<NovelCategoryDTO> searchList = novelSearchService.search(keyword, pageable);
         PageableDTO pageableDTO = new PageableDTO( (int)searchList.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
@@ -118,8 +167,19 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelSearch/likeCount")
     public String novelSearchViewCountLikeCount (@RequestParam(defaultValue="0") int categoryStatus, String keyword, Model model, @PageableDefault(page = 0, size = 10, sort = "novelLikeCountTotal" ,direction = Sort.Direction.DESC) Pageable pageable){
-        log.info("#############keyword:"+keyword);
-        Page<NovelCategoryDTO> searchList = novelService.search(keyword, pageable);
+        Page<NovelCategoryDTO> searchList = null;
+        if(categoryStatus == 1){
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            searchList = novelService.getNewNovelListSearch(targetPast,now,keyword,pageable);
+        }else if(categoryStatus == 2){
+            searchList = novelService.getEndNovelListSearch(keyword,pageable);
+        }else{
+            searchList = novelService.search(keyword, pageable);
+        }
 //        Page<NovelCategoryDTO> searchList = novelSearchService.search(keyword, pageable);
         PageableDTO pageableDTO = new PageableDTO( (int)searchList.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
@@ -137,8 +197,19 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelFindToTag")
     public String novelFindToTag (@RequestParam(defaultValue="0") int categoryStatus, String keyword, Model model, @PageableDefault(page = 0, size = 10, sort = "novelNumber" ,direction = Sort.Direction.DESC)Pageable pageable){
-        log.info("#############keyword:"+keyword);
-        Page<NovelCategoryDTO> searchList = novelService.search(keyword, pageable);
+        Page<NovelCategoryDTO> searchList = null;
+        if(categoryStatus == 1){
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            searchList = novelService.getNewNovelListSearch(targetPast,now,keyword,pageable);
+        }else if(categoryStatus == 2){
+            searchList = novelService.getEndNovelListSearch(keyword,pageable);
+        }else{
+            searchList = novelService.search(keyword, pageable);
+        }
 //        Page<NovelCategoryDTO> searchList = novelSearchService.search(keyword, pageable);
         PageableDTO pageableDTO = new PageableDTO( (int)searchList.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
@@ -154,8 +225,19 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelFindToTag/viewCount")
     public String novelFindToTagViewCount (@RequestParam(defaultValue="0") int categoryStatus, String keyword, Model model, @PageableDefault(page = 0, size = 10, sort = "novelViewCountTotal" ,direction = Sort.Direction.DESC)Pageable pageable){
-        log.info("#############keyword:"+keyword);
-        Page<NovelCategoryDTO> searchList = novelService.search(keyword, pageable);
+        Page<NovelCategoryDTO> searchList = null;
+        if(categoryStatus == 1){
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            searchList = novelService.getNewNovelListSearch(targetPast,now,keyword,pageable);
+        }else if(categoryStatus == 2){
+            searchList = novelService.getEndNovelListSearch(keyword,pageable);
+        }else{
+            searchList = novelService.search(keyword, pageable);
+        }
 //        Page<NovelCategoryDTO> searchList = novelSearchService.search(keyword, pageable);
         PageableDTO pageableDTO = new PageableDTO( (int)searchList.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);
@@ -171,8 +253,19 @@ public class NovelCategoryController {
     @LogStatus
     @GetMapping("/novelFindToTag/likeCount")
     public String novelFindToTagLikeCount (@RequestParam(defaultValue="0") int categoryStatus,String keyword, Model model, @PageableDefault(page = 0, size = 10, sort = "novelLikeCountTotal" ,direction = Sort.Direction.DESC)Pageable pageable){
-        log.info("#############keyword:"+keyword);
-        Page<NovelCategoryDTO> searchList = novelService.search(keyword, pageable);
+        Page<NovelCategoryDTO> searchList = null;
+        if(categoryStatus == 1){
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            cal.setTime(now);
+            cal.add(Calendar.DATE, -7);
+            Date targetPast = cal.getTime();
+            searchList = novelService.getNewNovelListSearch(targetPast,now,keyword,pageable);
+        }else if(categoryStatus == 2){
+            searchList = novelService.getEndNovelListSearch(keyword,pageable);
+        }else{
+            searchList = novelService.search(keyword, pageable);
+        }
 //        Page<NovelCategoryDTO> searchList = novelSearchService.search(keyword, pageable);
         PageableDTO pageableDTO = new PageableDTO( (int)searchList.getTotalElements(),pageable);
         pageableDTO.setCategoryStatus(categoryStatus);

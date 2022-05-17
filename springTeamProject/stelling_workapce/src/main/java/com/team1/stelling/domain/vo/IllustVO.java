@@ -4,20 +4,23 @@ package com.team1.stelling.domain.vo;
 import lombok.*;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.Generated;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Component
 @Entity
 @Table(name ="TBL_ILLUST")
-@Getter
+@Getter @Setter
+@SequenceGenerator(name ="ILLUST_SEQ" , allocationSize = 1)
 @ToString(of = {"illustNumber","illustTitle","illustContent","illustUploadDate","illustUpdateDate","illustHashTag","illustViewCount","illustLike","illustShortIntro"})
+@AllArgsConstructor
 @NoArgsConstructor
 public class IllustVO {
     @Id
-    @SequenceGenerator(name ="ILLUST_SEQ" , allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ILLUST_SEQ")
     @Column(name = "ILLUST_NUMBER")
     private Long illustNumber;
@@ -46,6 +49,13 @@ public class IllustVO {
     private int illustLike; /*각 일러스트에 대한 좋아요*/
     @Column(name = "ILLUST_SHORTINTRO")
     private String illustShortIntro;/*작품에 대한 짧은 소개*/
+    @Column(name = "ILLUST_FILENAME")
+    private String illustFileName;/*작품 name*/
+    @Column(name = "ILLUST_FILEPATH")
+    private String illustFilePath;/*작품 path*/
+    @Column(name = "ILLUST_UUID")
+    private String illustUuid;/*작품 uuid*/
+
 
     public void updateIllustTitle(String illustTitle) { this.illustTitle = illustTitle; }
 
@@ -63,7 +73,7 @@ public class IllustVO {
 
 
     @Builder
-    public IllustVO(Long illustNumber, UserVO userVO, String illustTitle, String illustContent, String illustUploadDate, String illustUpdateDate, String illustHashTag, int illustViewCount, int illustLike, String illustShortIntro) {
+    public IllustVO(Long illustNumber, UserVO userVO, String illustTitle, String illustContent, String illustUploadDate, String illustUpdateDate, String illustHashTag, int illustViewCount, int illustLike, String illustShortIntro, String illustFileName, String illustFilePath, String illustUuid) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         this.illustNumber = illustNumber;
@@ -74,6 +84,9 @@ public class IllustVO {
         this.illustViewCount = illustViewCount;
         this.illustLike = illustLike;
         this.illustShortIntro = illustShortIntro;
+        this.illustFileName = illustFileName;
+        this.illustFilePath = illustFilePath;
+        this.illustUuid = illustUuid;
         try {
             if(illustUploadDate != null) { this.illustUploadDate = sdf.parse(illustUploadDate); }
             if(illustUpdateDate != null) { this.illustUpdateDate = sdf.parse(illustUpdateDate); }

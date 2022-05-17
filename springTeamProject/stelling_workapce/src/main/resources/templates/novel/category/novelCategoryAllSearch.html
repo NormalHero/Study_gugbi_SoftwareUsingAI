@@ -44,9 +44,9 @@
                 </div>
                 <div id="totalR_side">
                     <div id="totalOption">
-                        <div class="OptionChange" th:onclick="'location.href=\''+ @{/novel/category/novelSearch(keyword=${pageableDTO.keyword})} +'\'' "><img src="/images/category/checkIcon.png" alt="체크아이콘">공개일자 순</div>
-                        <div class="OptionChange" th:onclick="'location.href=\''+ @{/novel/category/novelSearch/viewCount(keyword=${pageableDTO.keyword})} +'\'' "><img src="/images/category/optionPointIcon.png" alt="체크아이콘">조회순</div>
-                        <div class="OptionChange" th:onclick="'location.href=\''+ @{/novel/category/novelSearch/likeCount(keyword=${pageableDTO.keyword})} +'\'' "><img src="/images/category/optionPointIcon.png" alt="체크아이콘">추천순</div>
+                        <div class="OptionChange" th:onclick="'location.href=\''+ @{/novel/category/novelSearch(keyword=${pageableDTO.keyword},categoryStatus=${pageableDTO.categoryStatus})} +'\'' "><img src="/images/category/checkIcon.png" alt="체크아이콘">공개일자 순</div>
+                        <div class="OptionChange" th:onclick="'location.href=\''+ @{/novel/category/novelSearch/viewCount(keyword=${pageableDTO.keyword},categoryStatus=${pageableDTO.categoryStatus})} +'\'' "><img src="/images/category/optionPointIcon.png" alt="체크아이콘">조회순</div>
+                        <div class="OptionChange" th:onclick="'location.href=\''+ @{/novel/category/novelSearch/likeCount(keyword=${pageableDTO.keyword},categoryStatus=${pageableDTO.categoryStatus})} +'\'' "><img src="/images/category/optionPointIcon.png" alt="체크아이콘">추천순</div>
                     </div>
                         <a href="/novel/category/novelWrite" class="writeButton"><img src="/images/category/wordWriteIcon.png" alt="글등록아이콘">신규작품 등록</a>
                 </div>
@@ -57,6 +57,7 @@
 
                     <div id="searchFormWrap">
                         <form id="searchForm"  method="get" action="/novel/category/novelSearch">
+                            <input type="hidden" name="categoryStatus" th:value="${pageableDTO.categoryStatus}">
                             <input name="keyword" id="searchFormInput" type="text" placeholder="#검색할 태그를 입력하세요" maxlength="16">
                             <button class="searchFormWrapBtn">검색</button>
                             <div class="cancelImg" onclick="changeTagSearch()">
@@ -148,7 +149,7 @@
 
                     <th:block th:each="num:${#numbers.sequence(pageableDTO.startPage,pageableDTO.endPage)}">
                         <li  th:if="${pageableDTO.pageNumber== num}" th:text="${num}" class="pageActive"></li>
-                        <li th:unless="${pageableDTO.pageNumber == num}" ><a th:href="@{/novel/category/novelSearch(keyword=${pageableDTO.keyword},page=${num},categoryStatus=${pageableDTO.categoryStatus})}"></a></li>
+                        <li th:unless="${pageableDTO.pageNumber == num}" ><a  th:text="${num}" th:href="@{/novel/category/novelSearch(keyword=${pageableDTO.keyword},page=${num},categoryStatus=${pageableDTO.categoryStatus})}"></a></li>
                     </th:block>
 
 

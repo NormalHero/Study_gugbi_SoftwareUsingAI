@@ -57,6 +57,7 @@
 
                     <div id="searchFormWrap">
                         <form id="searchForm"  method="get" action="/novel/category/novelSearch">
+                            <input type="hidden" name="categoryStatus" th:value="${pageableDTO.categoryStatus}">
                             <input name="keyword" id="searchFormInput" type="text" placeholder="#검색할 태그를 입력하세요" maxlength="16">
                             <button class="searchFormWrapBtn">검색</button>
                             <div class="cancelImg" onclick="changeTagSearch()">
