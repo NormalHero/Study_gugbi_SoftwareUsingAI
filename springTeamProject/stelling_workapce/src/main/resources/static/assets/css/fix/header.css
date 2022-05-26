@@ -152,6 +152,18 @@ div.eventMenu div.menuArea{
     top: 3px;
     right: 0px;
     width: 22px;
+    height: 22px;
+}
+.nav_searchForm_btn button#searchNavFormBtn{
+    background: url( "/images/fix/search_big.png" ) no-repeat;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+
 }
 div.profileWrap{
     width: 88%;
@@ -278,6 +290,8 @@ div.mobile_header{display: none;}
 #welcomeMenu div:first-child {
     margin-bottom: 15px;
 }
+
+.menu_my_list li a, a.menu_logout {color: #434343; }
 
 /* 반응형*/
 
