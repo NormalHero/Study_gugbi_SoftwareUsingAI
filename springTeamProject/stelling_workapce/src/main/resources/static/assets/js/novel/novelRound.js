@@ -1,3 +1,7 @@
+
+let href;
+let subNovelNum;
+
 function ModalHandler(){
     document.body.classList.add('preventscroll');
     document.querySelector('.Sponmodalwrap').style.display='block'
@@ -142,31 +146,32 @@ $('.myPick').on("click", function () {
 
 $('.Noveltt').on("click", function () {
     if($(this).hasClass("locked")){
-
     }
 })
 
 
-let href;
-let subNovelNum;
 /*소설회차 잠금 모달*/
-$('.locked2').on("click", function (e) {
+$('.lockRow').on("click", function (e) {
     e.preventDefault();
     $('.modal_background').css('display', 'block');
     // lockIcon=$(this).children('img');
-    href=$(this).parent().attr('href');
+    href=$(this).parent().parent().attr('href');
     subNovelNum=$(this).parent().attr('name');
-
 })
 //후원 모달창 바깥영역 눌러서 닫기
 $(document).mouseup(function (e){
     let container = $('.modal_background');
     let container2 = $('.modal_background2');
+    let container3 = $('.modal_background3');
     if( container.has(e.target).length === 0){
         container.css('display','none');
     }
     if(container2.has(e.target).length === 0){
         container2.css('display','none');
+        // location.href=href;
+    }
+    if(container3.has(e.target).length === 0){
+        container3.css('display','none');
         // location.href=href;
     }
 });
@@ -179,153 +184,60 @@ $('.coinBtn2').on("click", function () {
 //후원 코인 결제 눌렀을 때
 $('.coinBtn1').on("click", function () {
     $('.modal_background').css('display', 'none');
-    $('.modal_background2').css('display', 'block');
 
+    checkBalanceAndBuy(novelNumber, subNovelNum, userNumber,function (result) {
+        if(result.msg=='fail'){
+            console.log("실패");
+            $('.modal_background3').css('display', 'block');
+            $('.balance2').html("현재 잔액:"+result.balance+"코인");
+
+        }else if(result.msg=='success'){
+            console.log('성공');
+            $('.modal_background2').css('display', 'block');
+            $('.balance').html("현재 잔액:"+result.balance+"코인");
+        }
+    })
+
+});
+
+function checkBalanceAndBuy(novelNumber, subNovelNum, userNumber, callback){
     $.ajax({
         type:"get",
         url:"/buyChapter/checkBalanceAndBuy?novelNumber="+novelNumber+"&subNovelNumber="+subNovelNum+"&userNumber="+userNumber+"",
+        dataType:"json",
         success:function (result) {
-            console.log(result);
+          if(callback){
+              callback(result);
+          }
+
         },
         error:function (error) {
             console.log(error);
         }
-    })
-})
+    });
+}
+
+
+
+
 //결제 완료모달창 닫기
 $('.goToRead').on("click", function () {
     $('.modal_background2').css('display', 'none');
     location.href=href;
+});
 
+//코인 충전모달창 닫기
+$('.x').on("click", function () {
+    $('.modal_background3').css('display', 'none');
+});
+$('.cashCancle').on("click",function () {
+    $('.modal_background3').css('display', 'none');
 })
 
 
-
-
-
-
-
-//
-//
-//
-//
-// //
-// // getSupportList(novelNumber, function (data) {
-// //     console.log(data);
-// // })
-//
-//
-// // function ResRank(){
-// //     ResRank= document.querySelector('.ResRank')
-// //     table = document.querySelector('.table')
-// //     cnt.slice(0,10)?.map((v,index) =>{
-// //
-// //         //  sponCnt = document.createTextNode(`${index}${v.id}님 ${v.sponCnt}개`)
-// //
-// //         ResRank.innerHTML +=
-// //             `
-// //
-// //         <span class="rankCnt"> ${index+1}위 ${v.id}님 ${v.sponCnt}개  <span/>
-// //         `
-// //     })
-// //
-// //     cnt?.map((v,index)=>{
-// //         table.innerHTML +=
-// //             `
-// //
-// //         <tr>
-// //              <th style="width: 33%">${index+1}위</th>
-// //              <th style="width: 33%">${v.id}님</th>
-// //              <th style="width: 33%"> ${v.sponCnt}개</th>
-// //          </tr>
-// //
-// //
-// //
-// //
-// //          `
-// //     })
-// //
-// // }
-//
-// ///페이징 처리
-// // const writeD = write();
-// // writeDum()
-// //
-// // function writeDum(){
-// //     NoveltotalCnt = document.createTextNode("전체(" +writeD.length+ ")개")
-// //     document.querySelector('.NoveltotalCnt').append(NoveltotalCnt)
-// //     Novel = document.querySelector('.Novel');
-// //
-// //     let current =0;
-// //     let current10 = current+10
-// //
-// //
-// //     writeD.slice(current,current10)?.map((v,index)=>{
-// //
-// //         Novel.innerHTML +=
-// //             ` <li class="Novelli">
-// //         <div class="NovelImg">
-// //         <img src="./파댕이2.PNG" alt="">
-// //
-// //         </div>
-// //
-// //         <div class="NovelDEC">
-// //             <div class="NovelDECS">
-// //                 <div class="Noveltt">${v.Novel_title} ${index+1}화</div>
-// //                 <div class="Novelday">${v.Novel_Date}</div>
-// //             </div>
-// //
-// //         </div>`
-// //
-// //     })
-// //
-// //
-// //
-// // }
-//
-//
-//
-//
-//
-// //최신순
-//
-//
-// let bb = document.querySelectorAll('.bb');
-// function clickHandler() {
-//     for (var i = 0; i < bb.length; i++){
-//         bb[i].classList.remove('choose');
-//     }
-//     this.classList.add('choose');
-// }
-//
-// for (var i = 0; i < bb.length; i++){
-//     bb[i].addEventListener('click', clickHandler);
-// }
-//
-//
-//
-// // 클릭 하트 변경
-// let heartChange = document.querySelectorAll('.changImg');
-// clickheartHandler();
-//
-//
-// let clickheat =true;
-// function clickheartHandler(clickheat){
-//     for(i=0; i< heartChange.length; i++){
-//         heartChange[i].addEventListener("click",function(){
-//             clickheat;
-//             if(!clickheat){
-//                 this.setAttribute("src","https://static-page.kakao.com/static/common/icon_like_already.svg?b34ad60df8d04b48d10fbba10519e931")
-//                 clickheat =true
-//
-//             }else{
-//                 this.setAttribute("src","https://static-page.kakao.com/static/common/icon_like.svg?f9e9a51be34a0e0106b7c1e179d0b43e")
-//                 clickheat =false
-//             }
-//
-//
-//         })
-//
-//     }
-//
-// }
+function checkUserNum() {
+ if(userNumber==null){
+     alert("로그인 후 이용가능한 서비스입니다.");
+     location.href="/user/login";
+ }
+}

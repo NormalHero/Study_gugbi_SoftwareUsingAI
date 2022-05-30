@@ -1,5 +1,8 @@
 package com.team1.stelling.controller;
 
+import com.team1.stelling.domain.dto.PageDTO;
+import com.team1.stelling.domain.repository.UserRepository;
+import com.team1.stelling.domain.vo.*;
 import com.team1.stelling.domain.dto.PageableDTO;
 import com.team1.stelling.domain.dto.PagingDTO;
 import com.team1.stelling.domain.vo.*;
@@ -57,10 +60,16 @@ public class MyLibraryController {
         log.info("myLibraryPick");
         return "myLibrary/myLibraryPick";
     }
-
+    
+    //코인샵 이동
     @GetMapping("/coinShop")
-    public String coinShop(){
-        log.info("coinShop");
+    public String coinShop(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        log.info("유저 세션 번호 : " + String.valueOf(userNumber) + "******************");
+        UserVO userVO = userService.findByUserNumber(userNumber);
+
+        model.addAttribute("userVO", userVO);
         return "cash/coinShop";
     }
 
@@ -73,10 +82,13 @@ public class MyLibraryController {
 
     //결제 리스트(마이페이지)
     @GetMapping("/payList")
-    public String payList(Long userNumber, Paging paging, Model model){
-        log.info("유저 번호" + String.valueOf(userNumber));
+    public String payList(Paging paging, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Long userNumber = (Long) session.getAttribute("userNumber");
+        log.info("userNumber + " + userNumber + "********");
         NumberFormat numberFormat = NumberFormat.getInstance();
-        String payChargeTotal = numberFormat.format(payService.getTotal(userNumber).getChargeTotal());
+        String payChargeTotal = null;
+        payChargeTotal = numberFormat.format(payService.getTotal(userNumber).getChargeTotal());
         log.info("총 결제 금액" + payChargeTotal);
         log.info(paging.toString());
 
@@ -92,11 +104,13 @@ public class MyLibraryController {
         model.addAttribute("pageMaker", pageMaker);
         model.addAttribute("payChargeTotal", payChargeTotal);
 //        model.addAttribute("pageDTO", new PageDTO(paging, payService.getSearchTotal(paging)));
-        return "myPage/myPagePayList";
+        return "/myPage/myPagePayList";
     }
 
     @GetMapping("/supportList")
-    public String supportList(Long supportSponser, Paging paging, Model model){
+    public String supportList(Paging paging, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Long supportSponser = (Long) session.getAttribute("userNumber");
         NumberFormat numberFormat = NumberFormat.getInstance();
         String supportCoinTotal = numberFormat.format(supportService.getSupportCoinTotal(supportSponser).getSupportTotal());
         log.info("총 후원 코인" + supportCoinTotal);
@@ -112,27 +126,5 @@ public class MyLibraryController {
         return "myPage/myPageSupportList";
     }
 
-    //후원 리스트(마이페이지)
-//    @GetMapping("/showList")
-//    public String showList(Long userNumber, Criteria criteria, Model model){
-//
-//    }
-
-//    @GetMapping("/payList/{userNumber}")
-//    public String payList(@PathVariable Long userNumber, String startDate, String endDate, Model model){
-//        if(startDate == null & endDate == null) {
-//            model.addAttribute("payList", payService.getList(userNumber));
-//        }
-//        return "myPage/myPagePayList";
-//    }
-    //날짜 검색(마이페이지)
-//    @GetMapping("/dateSelect")
-//    public void dateSelect(String startDate, String endDate)
-    //결제 내역 등록
-//    @PostMapping("/register/{userNumber}/{payCharge}/{payCoinCount}")
-//    public String register(@PathVariable Long userNumber, @PathVariable Long payCharge, @PathVariable Long payCoinCount){
-//        payService.register(userNumber, payCharge, payCoinCount);
-//        return "cash/coinShop";
-//    }
 
 }

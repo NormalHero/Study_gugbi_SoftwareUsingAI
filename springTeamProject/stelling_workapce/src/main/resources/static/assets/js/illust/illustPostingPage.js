@@ -172,17 +172,14 @@ $("input[type='file']").change(function(e){
                 $('input[name="illustFileName"]').val(item.illustFileName);
                 $('input[name="illustFilePath"]').val(item.illustFilePath);
                 $('input[name="illustUuid"]').val(item.illustUuid);
-                alert("OK")
-                console.log("ajax")
             })
         },
         error:function () {
-            alert("이미지 등록 실패")
         }
     });
 })
 /*form데이터 보내기*/
-$('.upBtn').on("click", function () {
+$('#upBtn').on("click", function () {
 
     let hashtag = $('#tag-list').text();
     hashtag = hashtag.replace(/x/gi, "");
@@ -190,6 +187,5 @@ $('.upBtn').on("click", function () {
     $('input[name="illustHashTag"]').val(hashtag);
 
     register.submit();
-    console.log("서브밋")
 });
 

@@ -17,7 +17,6 @@ function calc_length()
 function modal_close() {
     $('.modal').css('display', 'none');
 }
-
 function showfile(){
     $('.filebox').css('display', 'block');
 }
@@ -32,7 +31,6 @@ $("input[name='file']").on('change',function(){
         var fileName = $("#file").val();
         $(".upload-name").val(fileName);
         let formData = new FormData()
-        console.log($("input[type='file']")[0].files[0])
         formData.enctype="multipart/form-data";
         formData.method='POST';
         formData.action='/novel/novelFileUpload';
@@ -86,19 +84,43 @@ function getSession(){
 
 }
 
+//form태그 보내기
 $('.enter').on("click",function () {
+    if(!$('input[name="subNovelTitle"]').val()){
+        alert("소제목을 입력해주세요");
+        return;
+    }
+    if(!$('textarea[name="novelContent"]').val()){
+        alert("작품 내용을 입력해주세요");
+        return;
+    }
+    if(!$('textarea[name="subNovelWriterComment"]').val()){
+        alert("작품 후기를 입력해주세요");
+        return;
+    }
+
     sessionStorage.clear();
     $('input[name="content"]').val($('textarea[name="novelContent"]').val());
-    // $('input[name="subNovelTitle"]').val($('input[name="subNovelTitle"]').val());
     $('input[name="novelNumber"]').val(novelNumber);
     $('input[name="userNumber"]').val(userNumber);
-    // $('input[name="subNovelWriterComment"]').val($("#subNovelWriterComment").val());
 
     $(novelWriteForm).submit();
-
 })
 
+//수정 form태그 보내기
 $('.modifyEnter').on("click", function () {
+    if(!$('input[name="modify_sTitle"]').val()){
+        alert("소제목을 입력해주세요");
+        return;
+    }
+    if(!$('textarea[name="modify_novelContent"]').val()){
+        alert("작품 내용을 입력해주세요");
+        return;
+    }
+    if(!$('textarea[name="modify_writerComment"]').val()){
+        alert("작품 후기를 입력해주세요");
+        return;
+    }
     sessionStorage.clear();
     $('input[name="content"]').val($('textarea[name="modify_novelContent"]').val());
     $('input[name="subNovelTitle"]').val($('input[name="modify_sTitle"]').val());
